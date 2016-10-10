@@ -8,7 +8,8 @@
     "providers": [
         "Modules\\Core\\Providers\\CoreServiceProvider",
         "Laracasts\\Flash\\FlashServiceProvider",
-        "Mcamara\\LaravelLocalization\\LaravelLocalizationServiceProvider"
+        "Mcamara\\LaravelLocalization\\LaravelLocalizationServiceProvider",
+        "FloatingPoint\\Stylist\\StylistServiceProvider"
     ],
     "aliases":{
         "Flash": "Laracasts\\Flash\\Flash",

@@ -3,6 +3,9 @@
 namespace Modules\Setting\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Modules\Setting\Repositories\Eloquent\EloquentSettingRepository;
+use Modules\Setting\Repositories\SettingRepository;
+use Modules\Setting\Support\Settings;
 
 class SettingServiceProvider extends ServiceProvider
 {
@@ -48,11 +51,9 @@ class SettingServiceProvider extends ServiceProvider
     {
         $this->app->bind(SettingRepository::class, function () {
                 $repository = new EloquentSettingRepository(new Setting());
-
                 if (! config('app.cache')) {
                     return $repository;
                 }
-
                 return new CacheSettingDecorator($repository);
             });
         $this->app->bind(
