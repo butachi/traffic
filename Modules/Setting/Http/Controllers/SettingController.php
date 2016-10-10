@@ -1,12 +1,12 @@
 <?php
 
-namespace Modules\Dashboard\Http\Controllers\Admin;
+namespace Modules\Setting\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 
-class DashboardController extends Controller
+class SettingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard::admin.dashboard');
+        return view('setting::index');
     }
 
     /**
@@ -23,7 +23,7 @@ class DashboardController extends Controller
      */
     public function create()
     {
-        return view('dashboard::create');
+        return view('setting::create');
     }
 
     /**
@@ -41,7 +41,7 @@ class DashboardController extends Controller
      */
     public function edit()
     {
-        return view('dashboard::edit');
+        return view('setting::edit');
     }
 
     /**

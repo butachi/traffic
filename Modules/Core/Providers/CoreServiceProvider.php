@@ -21,6 +21,8 @@ class CoreServiceProvider extends ServiceProvider
      */
     protected $middleware = [
         'Core' => [
+            'permissions'           => 'PermissionMiddleware',
+            'auth.admin'            => 'AdminMiddleware',
             'localizationRedirect'  => 'LocalizationMiddleware',
         ],
     ];
