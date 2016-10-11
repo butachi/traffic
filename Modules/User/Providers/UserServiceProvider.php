@@ -13,6 +13,7 @@ class UserServiceProvider extends ServiceProvider
      */
     protected $defer = false;
 
+
     /**
      * Boot the application events.
      *
