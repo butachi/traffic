@@ -13,6 +13,22 @@ class UserServiceProvider extends ServiceProvider
      */
     protected $defer = false;
 
+    /**
+     * @var array
+     */
+    protected $providers = [
+        'Auth' => 'Modules\\Core\\Providers\\AuthServiceProvider',
+    ];
+
+    /**
+     * @var array
+     */
+    protected $middleware = [
+        'User' => [
+            'auth.guest' => 'GuestMiddleware',
+            'logged.in' => 'LoggedInMiddleware'
+        ],
+    ];
 
     /**
      * Boot the application events.
@@ -21,9 +37,7 @@ class UserServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
-        //$this->registerTranslations();
-        //$this->registerConfig();
+        $this->registerMiddleware($this->app['router']);
         $this->registerViews();
     }
 
@@ -34,22 +48,22 @@ class UserServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->registerConfig();
+        $this->app->register(
+            $this->getUserPackageServiceProvider()
+        );
+
+        $this->registerBindings();
     }
 
     /**
-     * Register config.
+     * Get the services provided by the provider.
      *
-     * @return void
+     * @return array
      */
-    protected function registerConfig()
+    public function provides()
     {
-        $this->publishes([
-            __DIR__.'/../Config/config.php' => config_path('user.php'),
-        ]);
-        $this->mergeConfigFrom(
-            __DIR__.'/../Config/config.php', 'user'
-        );
+        return [];
     }
 
     /**
@@ -64,36 +78,67 @@ class UserServiceProvider extends ServiceProvider
         $sourcePath = __DIR__.'/../Resources/views';
 
         $this->publishes([
-            $sourcePath => $viewPath
-        ]);
+                $sourcePath => $viewPath
+            ]);
 
         $this->loadViewsFrom(array_merge(array_map(function ($path) {
-            return $path . '/modules/user';
-        }, \Config::get('view.paths')), [$sourcePath]), 'user');
+                        return $path . '/modules/user';
+                    }, \Config::get('view.paths')), [$sourcePath]), 'user');
     }
 
-    /**
-     * Register translations.
-     *
-     * @return void
-     */
-    public function registerTranslations()
+    private function registerBindings()
     {
-        $langPath = base_path('resources/lang/modules/user');
-        if (is_dir($langPath)) {
-            $this->loadTranslationsFrom($langPath, 'user');
-        } else {
-            $this->loadTranslationsFrom(__DIR__ .'/../Resources/lang', 'user');
+        $driver = config('asgard.user.users.driver', 'Sentinel');
+
+        $this->app->bind(
+            'Modules\User\Repositories\UserRepository',
+            "Modules\\User\\Repositories\\PChi\\PChiUserRepository"
+        );
+
+        $this->app->bind(
+            'Modules\User\Repositories\RoleRepository',
+            "Modules\\User\\Repositories\\PChi\\PChiRoleRepository"
+        );
+        $this->app->bind(
+            'Modules\Core\Contracts\Authentication',
+            "Modules\\User\\Repositories\\PChi\\PChiAuthentication"
+        );
+    }
+
+    private function registerMiddleware($router)
+    {
+        foreach ($this->middleware as $module => $middlewares) {
+            foreach ($middlewares as $name => $middleware) {
+                $class = "Modules\\{$module}\\Http\\Middleware\\{$middleware}";
+
+                $router->middleware($name, $class);
+            }
         }
     }
 
     /**
-     * Get the services provided by the provider.
+     * Register config.
      *
-     * @return array
+     * @return void
      */
-    public function provides()
+    protected function registerConfig()
     {
-        return [];
+        $this->publishes([
+                __DIR__.'/../Config/config.php' => config_path('user.php'),
+            ]);
+        $this->mergeConfigFrom(
+            __DIR__.'/../Config/config.php', 'user'
+        );
+    }
+
+    private function getUserPackageServiceProvider()
+    {
+        $driver = config('user.driver', 'PChi');
+
+        if (!isset($this->providers[$driver])) {
+            throw new \Exception("Driver [{$driver}] does not exist");
+        }
+
+        return $this->providers[$driver];
     }
 }
