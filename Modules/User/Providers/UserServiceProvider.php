@@ -17,7 +17,7 @@ class UserServiceProvider extends ServiceProvider
      * @var array
      */
     protected $providers = [
-        'Auth' => 'Modules\\Core\\Providers\\AuthServiceProvider',
+        'Sentinel' => 'Cartalyst\\Sentinel\\Laravel\\SentinelServiceProvider',
     ];
 
     /**
@@ -88,20 +88,20 @@ class UserServiceProvider extends ServiceProvider
 
     private function registerBindings()
     {
-        $driver = config('asgard.user.users.driver', 'Sentinel');
+        $driver = config('user.driver', 'PChi');
 
         $this->app->bind(
             'Modules\User\Repositories\UserRepository',
-            "Modules\\User\\Repositories\\PChi\\PChiUserRepository"
+            "Modules\\User\\Repositories\\{$driver}\\PChiUserRepository"
         );
 
         $this->app->bind(
             'Modules\User\Repositories\RoleRepository',
-            "Modules\\User\\Repositories\\PChi\\PChiRoleRepository"
+            "Modules\\User\\Repositories\\{$driver}\\PChiRoleRepository"
         );
         $this->app->bind(
             'Modules\Core\Contracts\Authentication',
-            "Modules\\User\\Repositories\\PChi\\PChiAuthentication"
+            "Modules\\User\\Repositories\\{$driver}\\PChiAuthentication"
         );
     }
 
@@ -133,7 +133,7 @@ class UserServiceProvider extends ServiceProvider
 
     private function getUserPackageServiceProvider()
     {
-        $driver = config('user.driver', 'PChi');
+        $driver = config('user.driver', 'Sentinel');
 
         if (!isset($this->providers[$driver])) {
             throw new \Exception("Driver [{$driver}] does not exist");

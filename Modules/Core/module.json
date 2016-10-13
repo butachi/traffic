@@ -7,7 +7,6 @@
     "order": 0,
     "providers": [
         "Modules\\Core\\Providers\\CoreServiceProvider",
-        "Modules\\Core\\Providers\\AuthServiceProvider",
         "Laracasts\\Flash\\FlashServiceProvider",
         "Mcamara\\LaravelLocalization\\LaravelLocalizationServiceProvider",
         "FloatingPoint\\Stylist\\StylistServiceProvider"
