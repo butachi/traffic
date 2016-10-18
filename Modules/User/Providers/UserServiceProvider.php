@@ -17,7 +17,7 @@ class UserServiceProvider extends ServiceProvider
      * @var array
      */
     protected $providers = [
-        'Sentinel' => 'Cartalyst\\Sentinel\\Laravel\\SentinelServiceProvider',
+        'PChi' => 'Modules\\Core\\Providers\\AuthServiceProvider',
     ];
 
     /**
@@ -133,7 +133,7 @@ class UserServiceProvider extends ServiceProvider
 
     private function getUserPackageServiceProvider()
     {
-        $driver = config('user.driver', 'Sentinel');
+        $driver = config('user.driver', 'PChi');
 
         if (!isset($this->providers[$driver])) {
             throw new \Exception("Driver [{$driver}] does not exist");

@@ -2,10 +2,8 @@
 
 use Cartalyst\Sentinel\Checkpoints\NotActivatedException;
 use Cartalyst\Sentinel\Checkpoints\ThrottlingException;
-use Cartalyst\Sentinel\Laravel\Facades\Activation;
-use Cartalyst\Sentinel\Laravel\Facades\Reminder;
-use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Modules\Core\Contracts\Authentication;
+use Modules\Core\Facades\Sentinel;
 use Modules\User\Events\UserHasActivatedAccount;
 
 class PChiAuthentication implements Authentication
@@ -22,7 +20,6 @@ class PChiAuthentication implements Authentication
             if (Sentinel::authenticate($credentials, $remember)) {
                 return false;
             }
-
             return 'Invalid login or password.';
         } catch (NotActivatedException $e) {
             return 'Account not yet validated. Please check your email.';
