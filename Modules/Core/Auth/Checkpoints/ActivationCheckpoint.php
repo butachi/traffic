@@ -1,7 +1,7 @@
 <?php
-namespace Modules\Core\Authentication\Checkpoints;
+namespace Modules\Core\Auth\Checkpoints;
 
-use Modules\Core\Authentication\Users\UserInterface;
+use Modules\Core\Auth\Users\UserInterface;
 
 class ActivationCheckpoint implements CheckpointInterface
 {
@@ -10,14 +10,14 @@ class ActivationCheckpoint implements CheckpointInterface
     /**
      * The activation repository.
      *
-     * @var \Modules\Core\Authentication\Activations\ActivationRepositoryInterface
+     * @var \Modules\Core\Auth\Activations\ActivationRepositoryInterface
      */
     protected $activations;
 
     /**
      * Create a new activation checkpoint.
      *
-     * @param  \Modules\Core\Authentication\Activations\ActivationRepositoryInterface  $activations
+     * @param  \Modules\Core\Auth\Activations\ActivationRepositoryInterface  $activations
      * @return void
      */
     public function __construct(ActivationRepositoryInterface $activations)
@@ -44,9 +44,9 @@ class ActivationCheckpoint implements CheckpointInterface
     /**
      * Checks the activation status of the given user.
      *
-     * @param  \Modules\Core\Authentication\Users\UserInterface  $user
+     * @param  \Modules\Core\Auth\Users\UserInterface  $user
      * @return bool
-     * @throws \Modules\Core\Authentication\Checkpoints\NotActivatedException
+     * @throws \Modules\Core\Auth\Checkpoints\NotActivatedException
      */
     protected function checkActivation(UserInterface $user)
     {

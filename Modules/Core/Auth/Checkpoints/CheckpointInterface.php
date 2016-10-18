@@ -1,14 +1,14 @@
 <?php
-namespace Modules\Core\Authentication\Checkpoints;
+namespace Modules\Core\Auth\Checkpoints;
 
-use Modules\Core\Authentication\Users\UserInterface;
+use Modules\Core\Auth\Users\UserInterface;
 
 interface CheckpointInterface
 {
     /**
      * Checkpoint after a user is logged in. Return false to deny persistence.
      *
-     * @param  \Modules\Core\Authentication\Users\UserInterface  $user
+     * @param  \Modules\Core\Auth\Users\UserInterface  $user
      * @return bool
      */
     public function login(UserInterface $user);
@@ -16,7 +16,7 @@ interface CheckpointInterface
     /**
      * Checkpoint for when a user is currently stored in the session.
      *
-     * @param  \Modules\Core\Authentication\Users\UserInterface  $user
+     * @param  \Modules\Core\Auth\Users\UserInterface  $user
      * @return bool
      */
     public function check(UserInterface $user);
@@ -26,7 +26,7 @@ interface CheckpointInterface
      * passed and the result of the method will not affect anything, as the
      * login failed.
      *
-     * @param  \Modules\Core\Authentication\Users\UserInterface  $user
+     * @param  \Modules\Core\Auth\Users\UserInterface  $user
      * @return void
      */
     public function fail(UserInterface $user = null);

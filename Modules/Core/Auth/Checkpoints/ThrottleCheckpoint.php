@@ -1,15 +1,15 @@
 <?php
-namespace Modules\Core\Authentication\Checkpoints;
+namespace Modules\Core\Auth\Checkpoints;
 
-use Modules\Core\Authentication\Throttling\ThrottleRepositoryInterface;
-use Modules\Core\Authentication\Users\UserInterface;
+use Modules\Core\Auth\Throttling\ThrottleRepositoryInterface;
+use Modules\Core\Auth\Users\UserInterface;
 
 class ThrottleCheckpoint implements CheckpointInterface
 {
     /**
      * The throttle repository.
      *
-     * @var \Modules\Core\Authentication\Throttling\ThrottleRepositoryInterface
+     * @var \Modules\Core\Auth\Throttling\ThrottleRepositoryInterface
      */
     protected $throttle;
 
@@ -23,7 +23,7 @@ class ThrottleCheckpoint implements CheckpointInterface
     /**
      * Constructor.
      *
-     * @param  \Modules\Core\Authentication\Throttling\ThrottleRepositoryInterface  $throttle
+     * @param  \Modules\Core\Auth\Throttling\ThrottleRepositoryInterface  $throttle
      * @param  string  $ipAddress
      * @return void
      */
@@ -71,7 +71,7 @@ class ThrottleCheckpoint implements CheckpointInterface
      * Checks the throttling status of the given user.
      *
      * @param  string  $action
-     * @param  \Modules\Core\Authentication\Users\UserInterface|null  $user
+     * @param  \Modules\Core\Auth\Users\UserInterface|null  $user
      * @return bool
      */
     protected function checkThrottling($action, UserInterface $user = null)
@@ -120,7 +120,7 @@ class ThrottleCheckpoint implements CheckpointInterface
      * @param  string  $message
      * @param  string  $type
      * @param  int  $delay
-     * @throws \Modules\Core\Authentication\Checkpoints\ThrottlingException
+     * @throws \Modules\Core\Auth\Checkpoints\ThrottlingException
      */
     protected function throwException($message, $type, $delay)
     {

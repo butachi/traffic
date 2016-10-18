@@ -18,9 +18,9 @@
  * @link       http://cartalyst.com
  */
 
-namespace Modules\Core\Authentication\Checkpoints;
+namespace Modules\Core\Auth\Checkpoints;
 
-use Modules\Core\Authentication\Users\UserInterface;
+use Modules\Core\Auth\Users\UserInterface;
 
 trait AuthenticatedCheckpoint
 {

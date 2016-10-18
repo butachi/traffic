@@ -1,4 +1,4 @@
-<?php namespace Modules\Core\Authentication\Users;
+<?php namespace Modules\Core\Auth\Users;
 
 interface UserInterface {
     /**

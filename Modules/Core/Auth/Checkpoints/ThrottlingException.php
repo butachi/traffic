@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Core\Authentication\Checkpoints;
+namespace Modules\Core\Auth\Checkpoints;
 
 use Carbon\Carbon;
 use RuntimeException;

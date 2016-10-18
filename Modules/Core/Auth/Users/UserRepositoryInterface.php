@@ -1,4 +1,4 @@
-<?php namespace Modules\Core\Authentication\Users;
+<?php namespace Modules\Core\Auth\Users;
 
 use Closure;
 
@@ -7,7 +7,7 @@ interface UserRepositoryInterface {
      * Finds a user by the given primary key.
      *
      * @param  int  $id
-     * @return \Modules\Core\Authentication\Users\UserInterface
+     * @return \Modules\Core\Auth\Users\UserInterface
      */
     public function findById($id);
 
@@ -15,7 +15,7 @@ interface UserRepositoryInterface {
      * Finds a user by the given credentials.
      *
      * @param  array  $credentials
-     * @return \Modules\Core\Authentication\Users\UserInterface
+     * @return \Modules\Core\Auth\Users\UserInterface
      */
     public function findByCredentials(array $credentials);
 
@@ -23,7 +23,7 @@ interface UserRepositoryInterface {
      * Finds a user by the given persistence code.
      *
      * @param  string  $code
-     * @return \Modules\Core\Authentication\Users\UserInterface
+     * @return \Modules\Core\Auth\Users\UserInterface
      */
     public function findByPersistenceCode($code);
 
@@ -31,22 +31,22 @@ interface UserRepositoryInterface {
      * Records a login for the given user.
      *
      * @param UserInterface $user
-     * @return \Modules\Core\Authentication\Users\UserInterface
+     * @return \Modules\Core\Auth\Users\UserInterface
      */
     public function recordLogin(UserInterface $user);
 
     /**
      * Records a logout for the given user.
      *
-     * @param  \Modules\Core\Authentication\Users\UserInterface  $user
-     * @return \Modules\Core\Authentication\Users\UserInterface|bool
+     * @param  \Modules\Core\Auth\Users\UserInterface  $user
+     * @return \Modules\Core\Auth\Users\UserInterface|bool
      */
     public function recordLogout(UserInterface $user);
 
     /**
      * Validate the password of the given user.
      *
-     * @param  \Modules\Core\Authentication\Users\UserInterface  $user
+     * @param  \Modules\Core\Auth\Users\UserInterface  $user
      * @param  array  $credentials
      * @return bool
      */
@@ -63,7 +63,7 @@ interface UserRepositoryInterface {
     /**
      * Validate if the given user is valid for updating.
      *
-     * @param  \Modules\Core\Authentication\Users\UserInterface|int  $user
+     * @param  \Modules\Core\Auth\Users\UserInterface|int  $user
      * @param  array  $credentials
      * @return bool
      */
@@ -74,16 +74,16 @@ interface UserRepositoryInterface {
      *
      * @param  array $credentials
      * @param Closure $callback
-     * @return \Modules\Core\Authentication\Users\UserInterface
+     * @return \Modules\Core\Auth\Users\UserInterface
      */
     public function create(array $credentials, Closure $callback = null);
 
     /**
      * Updates a user.
      *
-     * @param  \Modules\Core\Authentication\Users\UserInterface|int  $user
+     * @param  \Modules\Core\Auth\Users\UserInterface|int  $user
      * @param  array  $credentials
-     * @return \Modules\Core\Authentication\Users\UserInterface
+     * @return \Modules\Core\Auth\Users\UserInterface
      */
     public function update($user, array $credentials);
 } 

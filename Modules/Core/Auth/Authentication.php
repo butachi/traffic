@@ -1,10 +1,10 @@
-<?php namespace Modules\Core\Authentication;
+<?php namespace Modules\Core\Auth;
 
 use InvalidArgumentException;
 use Illuminate\Events\Dispatcher;
-use Modules\Core\Authentication\Profiles\ProfileRepositoryInterface;
-use Modules\Core\Authentication\Roles\RoleRepositoryInterface;
-use Modules\Core\Authentication\Users\UserRepositoryInterface;
+use Modules\Core\Auth\Profiles\ProfileRepositoryInterface;
+use Modules\Core\Auth\Roles\RoleRepositoryInterface;
+use Modules\Core\Auth\Users\UserRepositoryInterface;
 use Modules\Core\Support\Traits\EventTrait;
 
 class Authentication {
@@ -12,7 +12,7 @@ class Authentication {
 
     /**
      * The current cached, logged in user
-     * @var \Modules\Core\Authentication\Users\UserInterface
+     * @var \Modules\Core\Auth\Users\UserInterface
      */
     protected $user;
 
@@ -30,7 +30,7 @@ class Authentication {
     protected $users;
 
     /**
-     * @var \Modules\Core\Authentication\Roles\RoleRepositoryInterface
+     * @var \Modules\Core\Auth\Roles\RoleRepositoryInterface
      */
     protected $roles;
 
@@ -72,23 +72,23 @@ class Authentication {
     /**
      * Create a new Sentinel instance.
      *
-     * @param \Modules\Core\Authentication\Users\UserRepositoryInterface $users
-     * @param \Modules\Core\Authentication\Roles\RoleRepositoryInterface $roles
-     * @param \Modules\Core\Authentication\Profiles\ProfileRepositoryInterface $profiles
+     * @param \Modules\Core\Auth\Users\UserRepositoryInterface $users
+     * @param \Modules\Core\Auth\Roles\RoleRepositoryInterface $roles
+     * @param \Modules\Core\Auth\Profiles\ProfileRepositoryInterface $profiles
      * @param \Illuminate\Events\Dispatcher $dispatcher
-     * @return \Modules\Core\Authentication\Authentication
+     * @return \Modules\Core\Auth\Authentication
      */
     public function __construct(
         UserRepositoryInterface $users,
         RoleRepositoryInterface $roles,
-        ProfileRepositoryInterface $profiles,
+        //ProfileRepositoryInterface $profiles,
         Dispatcher $dispatcher
     ) {
         $this->users = $users;
 
         $this->roles = $roles;
 
-        $this->profiles = $profiles;
+        //$this->profiles = $profiles;
 
         $this->dispatcher = $dispatcher;
     }
@@ -99,7 +99,7 @@ class Authentication {
      *
      * @param  array  $credentials
      * @param  \Closure|bool  $callback
-     * @return \Modules\Core\Authentication\Users\UserInteface|bool
+     * @return \Modules\Core\Auth\Users\UserInteface|bool
      * @throws \InvalidArgumentException
      */
     public function register(array $credentials, $callback = null)
@@ -133,7 +133,7 @@ class Authentication {
      * Registers and activates the user.
      *
      * @param  array  $credentials
-     * @return \Modules\Core\Authentication\Users\UserInterface|bool
+     * @return \Modules\Core\Auth\Users\UserInterface|bool
      */
     public function registerAndActivate(array $credentials)
     {
@@ -175,7 +175,7 @@ class Authentication {
     /**
      * Checks to see if a user is logged in.
      *
-     * @return \Modules\Core\Authentication\Users\UserInterface|bool
+     * @return \Modules\Core\Auth\Users\UserInterface|bool
      */
     public function check()
     {
@@ -202,7 +202,7 @@ class Authentication {
     /**
      * Checks to see if a user is logged in, bypassing checkpoints
      *
-     * @return \Modules\Core\Authentication\Users\UserInterface|bool
+     * @return \Modules\Core\Auth\Users\UserInterface|bool
      */
     public function forceCheck()
     {
@@ -214,7 +214,7 @@ class Authentication {
     /**
      * Checks if we are currently a guest.
      *
-     * @return \Modules\Core\Authentication\Users\UserInterface|bool
+     * @return \Modules\Core\Auth\Users\UserInterface|bool
      */
     public function guest()
     {
@@ -224,10 +224,10 @@ class Authentication {
     /**
      * Authenticates a user, with "remember" flag.
      *
-     * @param  \Modules\Core\Authentication\Users\UserInterface|array  $credentials
+     * @param  \Modules\Core\Auth\Users\UserInterface|array  $credentials
      * @param  bool  $remember
      * @param  bool  $login
-     * @return \Modules\Core\Authentication\Users\UserInterface|bool
+     * @return \Modules\Core\Auth\Users\UserInterface|bool
      */
     public function authenticate($credentials, $remember = false, $login = true)
     {
@@ -272,8 +272,8 @@ class Authentication {
     /**
      * Authenticates a user, with the "remember" flag.
      *
-     * @param  \Modules\Core\Authentication\Users\UserInterface|array  $credentials
-     * @return \Modules\Core\Authentication\Users\UserInterface|bool
+     * @param  \Modules\Core\Auth\Users\UserInterface|array  $credentials
+     * @return \Modules\Core\Auth\Users\UserInterface|bool
      */
     public function authenticateAndRemember($credentials)
     {
@@ -283,9 +283,9 @@ class Authentication {
     /**
      * Forces an authentication to bypass checkpoints.
      *
-     * @param  \Modules\Core\Authentication\Users\UserInterface|array  $credentials
+     * @param  \Modules\Core\Auth\Users\UserInterface|array  $credentials
      * @param  bool  $remember
-     * @return \Modules\Core\Authentication\Users\UserInterface|bool
+     * @return \Modules\Core\Auth\Users\UserInterface|bool
      */
     public function forceAuthenticate($credentials, $remember = false)
     {
@@ -297,8 +297,8 @@ class Authentication {
     /**
      * Forces an authentication to bypass checkpoints, with the "remember" flag.
      *
-     * @param  \Modules\Core\Authentication\Users\UserInterface|array  $credentials
-     * @return \Modules\Core\Authentication\Users\UserInterface|bool
+     * @param  \Modules\Core\Auth\Users\UserInterface|array  $credentials
+     * @return \Modules\Core\Auth\Users\UserInterface|bool
      */
     public function forceAuthenticateAndRemember($credentials)
     {
@@ -308,8 +308,8 @@ class Authentication {
     /**
      * Attempt a stateless authentication.
      *
-     * @param  \Modules\Core\Authentication\Users\UserInterface|array  $credentials
-     * @return \Modules\Core\Authentication\Users\UserInterface|bool
+     * @param  \Modules\Core\Auth\Users\UserInterface|array  $credentials
+     * @return \Modules\Core\Auth\Users\UserInterface|bool
      */
     public function stateless($credentials)
     {
@@ -424,9 +424,9 @@ class Authentication {
     /**
      * Persists a login for the given user.
      *
-     * @param  \Modules\Core\Authentication\Users\UserInterface  $user
+     * @param  \Modules\Core\Auth\Users\UserInterface  $user
      * @param  bool  $remember
-     * @return \Modules\Core\Authentication\Users\UserInterface|bool
+     * @return \Modules\Core\Auth\Users\UserInterface|bool
      */
     public function login(UserInterface $user, $remember = false)
     {
@@ -446,8 +446,8 @@ class Authentication {
     /**
      * Persists a login for the given user, with the "remember" flag.
      *
-     * @param  \Modules\Core\Authentication\Users\UserInterface  $user
-     * @return \Modules\Core\Authentication\Users\UserInterface|bool
+     * @param  \Modules\Core\Auth\Users\UserInterface  $user
+     * @return \Modules\Core\Auth\Users\UserInterface|bool
      */
     public function loginAndRemember(UserInterface $user)
     {
@@ -457,7 +457,7 @@ class Authentication {
     /**
      * Logs the current user out.
      *
-     * @param  \Modules\Core\Authentication\Users\UserInterface  $user
+     * @param  \Modules\Core\Auth\Users\UserInterface  $user
      * @param  bool  $everywhere
      * @return bool
      */
@@ -551,7 +551,7 @@ class Authentication {
      * Add a new checkpoint to Sentinel.
      *
      * @param  string  $key
-     * @param  \Modules\Core\Authentication\Checkpoints\CheckpointInterface  $checkpoint
+     * @param  \Modules\Core\Auth\Checkpoints\CheckpointInterface  $checkpoint
      * @return void
      */
     public function addCheckpoint($key, CheckpointInterface $checkpoint)
@@ -578,7 +578,7 @@ class Authentication {
      * the cycle fails.
      *
      * @param  string  $method
-     * @param  \Modules\Core\Authentication\Users\UserInterface  $user
+     * @param  \Modules\Core\Auth\Users\UserInterface  $user
      * @param  bool  $halt
      * @return bool
      */
@@ -603,7 +603,7 @@ class Authentication {
      * Returns the currently logged in user, lazily checking for it.
      *
      * @param  bool  $check
-     * @return \Modules\Core\Authentication\Users\UserInterface
+     * @return \Modules\Core\Auth\Users\UserInterface
      */
     public function getUser($check = true)
     {
@@ -617,7 +617,7 @@ class Authentication {
     /**
      * Sets the user associated with Sentinel (does not log in).
      *
-     * @param  \Modules\Core\Authentication\Users\UserInterface  $user
+     * @param  \Modules\Core\Auth\Users\UserInterface  $user
      * @return void
      */
     public function setUser(UserInterface $user)
@@ -628,7 +628,7 @@ class Authentication {
     /**
      * Returns the user repository.
      *
-     * @return \Modules\Core\Authentication\Users\UserRepositoryInterface
+     * @return \Modules\Core\Auth\Users\UserRepositoryInterface
      */
     public function getUserRepository()
     {
@@ -638,7 +638,7 @@ class Authentication {
     /**
      * Sets the user repository.
      *
-     * @param  \Modules\Core\Authentication\Users\UserRepositoryInterface  $users
+     * @param  \Modules\Core\Auth\Users\UserRepositoryInterface  $users
      * @return void
      */
     public function setUserRepository(UserRepositoryInterface $users)
@@ -651,7 +651,7 @@ class Authentication {
     /**
      * Returns the role repository.
      *
-     * @return \Modules\Core\Authentication\Roles\RoleRepositoryInterface
+     * @return \Modules\Core\Auth\Roles\RoleRepositoryInterface
      */
     public function getRoleRepository()
     {
@@ -661,7 +661,7 @@ class Authentication {
     /**
      * Sets the role repository.
      *
-     * @param  \Modules\Core\Authentication\Roles\RoleRepositoryInterface  $roles
+     * @param  \Modules\Core\Auth\Roles\RoleRepositoryInterface  $roles
      * @return void
      */
     public function setRoleRepository(RoleRepositoryInterface $roles)
@@ -672,7 +672,7 @@ class Authentication {
     /**
      * Returns the persistences repository.
      *
-     * @return \Modules\Core\Authentication\Persistences\PersistenceRepositoryInterface
+     * @return \Modules\Core\Auth\Persistences\PersistenceRepositoryInterface
      */
     public function getPersistenceRepository()
     {
@@ -682,7 +682,7 @@ class Authentication {
     /**
      * Sets the persistences repository.
      *
-     * @param  \Modules\Core\Authentication\Persistences\PersistenceRepositoryInterface  $persistences
+     * @param  \Modules\Core\Auth\Persistences\PersistenceRepositoryInterface  $persistences
      * @return void
      */
     public function setPersistenceRepository(PersistenceRepositoryInterface $persistences)
@@ -693,7 +693,7 @@ class Authentication {
     /**
      * Returns the activations repository.
      *
-     * @return \Modules\Core\Authentication\Activations\ActivationRepositoryInterface
+     * @return \Modules\Core\Auth\Activations\ActivationRepositoryInterface
      */
     public function getActivationRepository()
     {
@@ -703,7 +703,7 @@ class Authentication {
     /**
      * Sets the activations repository.
      *
-     * @param  \Modules\Core\Authentication\Activations\ActivationRepositoryInterface  $activations
+     * @param  \Modules\Core\Auth\Activations\ActivationRepositoryInterface  $activations
      * @return void
      */
     public function setActivationRepository(ActivationRepositoryInterface $activations)
@@ -714,7 +714,7 @@ class Authentication {
     /**
      * Returns the reminders repository.
      *
-     * @return \Modules\Core\Authentication\Reminders\ReminderRepositoryInterface
+     * @return \Modules\Core\Auth\Reminders\ReminderRepositoryInterface
      */
     public function getReminderRepository()
     {
@@ -724,7 +724,7 @@ class Authentication {
     /**
      * Sets the reminders repository.
      *
-     * @param  \Modules\Core\Authentication\Reminders\ReminderRepositoryInterface  $reminders
+     * @param  \Modules\Core\Auth\Reminders\ReminderRepositoryInterface  $reminders
      * @return void
      */
     public function setReminderRepository(ReminderRepositoryInterface $reminders)

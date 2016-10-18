@@ -1,9 +1,10 @@
 <?php namespace Modules\Core\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Modules\Core\Authentication\Authentication;
-use Modules\Core\Authentication\Hashing\NativeHasher;
-use Modules\Core\Authentication\Users\IlluminateUserRepository;
+use Modules\Core\Auth\Authentication;
+use Modules\Core\Auth\Hashing\NativeHasher;
+use Modules\Core\Auth\Roles\IlluminateRoleRepository;
+use Modules\Core\Auth\Users\IlluminateUserRepository;
 
 class AuthServiceProvider extends ServiceProvider{
     public function boot()
@@ -83,7 +84,7 @@ class AuthServiceProvider extends ServiceProvider{
             $auth = new Authentication(
                 $app['auth.users'],
                 $app['auth.roles'],
-                $app['auth.profile'],
+                //$app['auth.profile'],
                 $app['events']
             );
             return $auth;

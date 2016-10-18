@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Core\Authentication\Hashing;
+namespace Modules\Core\Auth\Hashing;
 
 use RuntimeException;
 

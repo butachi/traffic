@@ -1,5 +1,5 @@
 <?php
-namespace Modules\Core\Authentication\Hashing;
+namespace Modules\Core\Auth\Hashing;
 
 interface HasherInterface
 {

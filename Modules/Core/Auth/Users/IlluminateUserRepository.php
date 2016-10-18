@@ -1,9 +1,9 @@
 <?php
 
-namespace Modules\Core\Authentication\Users;
+namespace Modules\Core\Auth\Users;
 
 use Carbon\Carbon;
-use Modules\Core\Authentication\Hashing\HasherInterface;
+use Modules\Core\Auth\Hashing\HasherInterface;
 use Modules\Core\Support\Traits\EventTrait;
 use Modules\Core\Support\Traits\RepositoryTrait;
 use Closure;
@@ -17,7 +17,7 @@ class IlluminateUserRepository implements UserRepositoryInterface
     /**
      * The hasher instance.
      *
-     * @var \Modules\Core\Authentication\Hashing\HasherInterface
+     * @var \Modules\Core\Auth\Hashing\HasherInterface
      */
     protected $hasher;
 
@@ -26,12 +26,12 @@ class IlluminateUserRepository implements UserRepositoryInterface
      *
      * @var string
      */
-    protected $model = 'Modules\Core\Authentication\Users\EloquentUser';
+    protected $model = 'Modules\Core\Auth\Users\EloquentUser';
 
     /**
      * Create a new Illuminate user repository.
      *
-     * @param  \Modules\Core\Authentication\Hashing\HasherInterface  $hasher
+     * @param  \Modules\Core\Auth\Hashing\HasherInterface  $hasher
      * @param  \Illuminate\Events\Dispatcher  $dispatcher
      * @param  string  $model
      * @return void
@@ -272,7 +272,7 @@ class IlluminateUserRepository implements UserRepositoryInterface
     /**
      * Fills a user with the given credentials, intelligently.
      *
-     * @param  \Modules\Core\Authentication\Users\UserInterface  $user
+     * @param  \Modules\Core\Auth\Users\UserInterface  $user
      * @param  array  $credentials
      * @return void
      */
@@ -308,7 +308,7 @@ class IlluminateUserRepository implements UserRepositoryInterface
     /**
      * Returns the hasher instance.
      *
-     * @return \Modules\Core\Authentication\Hashing\HasherInterface
+     * @return \Modules\Core\Auth\Hashing\HasherInterface
      */
     public function getHasher()
     {
@@ -318,7 +318,7 @@ class IlluminateUserRepository implements UserRepositoryInterface
     /**
      * Sets the hasher instance.
      *
-     * @param \Modules\Core\Authentication\Hashing\HasherInterface  $hasher
+     * @param \Modules\Core\Auth\Hashing\HasherInterface  $hasher
      * @return void
      */
     public function setHasher(HasherInterface $hasher)
