@@ -2,8 +2,11 @@
 
 use Illuminate\Support\ServiceProvider;
 use Modules\Core\Auth\Authentication;
+use Modules\Core\Auth\Cookies\IlluminateCookie;
 use Modules\Core\Auth\Hashing\NativeHasher;
+use Modules\Core\Auth\Persistences\IlluminatePersistenceRepository;
 use Modules\Core\Auth\Roles\IlluminateRoleRepository;
+use Modules\Core\Auth\Sessions\IlluminateSession;
 use Modules\Core\Auth\Users\IlluminateUserRepository;
 
 class AuthServiceProvider extends ServiceProvider{
@@ -14,13 +17,66 @@ class AuthServiceProvider extends ServiceProvider{
 
     public function register()
     {
-        //$this->registerPersistences();
+        $this->registerPersistences();
         $this->registerUsers();
         $this->registerRoles();
         //$this->registerCheckpoints();
         //$this->registerReminders();
         $this->registerSentinel();
         //$this->setUserResolver();
+    }
+
+    /**
+     * Registers the persistences.
+     *
+     * @return void
+     */
+    protected function registerPersistences()
+    {
+        $this->registerSession();
+        $this->registerCookie();
+
+        $this->app->singleton('auth.persistence', function ($app) {
+                $config = $app['config']->get('core');
+
+                $model  = array_get($config, 'persistences.model');
+                $single = array_get($config, 'persistences.single');
+                $users  = array_get($config, 'users.model');
+
+                if (class_exists($users) && method_exists($users, 'setPersistencesModel')) {
+                    forward_static_call_array([$users, 'setPersistencesModel'], [$model]);
+                }
+
+                return new IlluminatePersistenceRepository($app['auth.session'], $app['auth.cookie'], $model, $single);
+            });
+    }
+
+    /**
+     * Registers the session.
+     *
+     * @return void
+     */
+    protected function registerSession()
+    {
+        $this->app->singleton('auth.session', function ($app) {
+                $key = $app['config']->get('core.session');
+
+                return new IlluminateSession($app['session.store'], $key);
+            });
+    }
+
+    /**
+     * Registers the cookie.
+     *
+     * @return void
+     */
+    protected function registerCookie()
+    {
+        $this->app->singleton('auth.cookie', function ($app) {
+                $key = $app['config']->get('core.cookie');
+
+                return new IlluminateCookie($app['request'], $app['cookie'], $key);
+            });
     }
 
     public function registerUsers()
@@ -82,9 +138,9 @@ class AuthServiceProvider extends ServiceProvider{
     {
         $this->app->singleton('authentication', function( $app ) {
             $auth = new Authentication(
+                $app['auth.persistence'],
                 $app['auth.users'],
                 $app['auth.roles'],
-                //$app['auth.profile'],
                 $app['events']
             );
             return $auth;

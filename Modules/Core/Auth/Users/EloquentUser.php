@@ -1,30 +1,11 @@
 <?php
+namespace Modules\Core\Auth\Users;
 
-/**
- * Part of the Sentinel package.
- *
- * NOTICE OF LICENSE
- *
- * Licensed under the 3-clause BSD License.
- *
- * This source file is subject to the 3-clause BSD License that is
- * bundled with this package in the LICENSE file.
- *
- * @package    Sentinel
- * @version    2.0.7
- * @author     Cartalyst LLC
- * @license    BSD License (3-clause)
- * @copyright  (c) 2011-2015, Cartalyst LLC
- * @link       http://cartalyst.com
- */
-
-namespace Cartalyst\Sentinel\Users;
-
-use Cartalyst\Sentinel\Permissions\PermissibleInterface;
-use Cartalyst\Sentinel\Permissions\PermissibleTrait;
-use Cartalyst\Sentinel\Persistences\PersistableInterface;
-use Cartalyst\Sentinel\Roles\RoleableInterface;
-use Cartalyst\Sentinel\Roles\RoleInterface;
+use Modules\Core\Auth\Permissions\PermissibleInterface;
+use Modules\Core\Auth\Permissions\PermissibleTrait;
+use Modules\Core\Auth\Persistences\PersistableInterface;
+use Modules\Core\Auth\Roles\RoleableInterface;
+use Modules\Core\Auth\Roles\RoleInterface;
 use Illuminate\Database\Eloquent\Model;
 
 class EloquentUser extends Model implements RoleableInterface, PermissibleInterface, PersistableInterface, UserInterface
@@ -69,35 +50,35 @@ class EloquentUser extends Model implements RoleableInterface, PermissibleInterf
      *
      * @var string
      */
-    protected static $rolesModel = 'Cartalyst\Sentinel\Roles\EloquentRole';
+    protected static $rolesModel = 'Modules\Core\Auth\Roles\EloquentRole';
 
     /**
      * The Eloquent persistences model name.
      *
      * @var string
      */
-    protected static $persistencesModel = 'Cartalyst\Sentinel\Persistences\EloquentPersistence';
+    protected static $persistencesModel = 'Modules\Core\Auth\Persistences\EloquentPersistence';
 
     /**
      * The Eloquent activations model name.
      *
      * @var string
      */
-    protected static $activationsModel = 'Cartalyst\Sentinel\Activations\EloquentActivation';
+    protected static $activationsModel = 'Modules\Core\Auth\Activations\EloquentActivation';
 
     /**
      * The Eloquent reminders model name.
      *
      * @var string
      */
-    protected static $remindersModel = 'Cartalyst\Sentinel\Reminders\EloquentReminder';
+    protected static $remindersModel = 'Modules\Core\Auth\Reminders\EloquentReminder';
 
     /**
      * The Eloquent throttling model name.
      *
      * @var string
      */
-    protected static $throttlingModel = 'Cartalyst\Sentinel\Throttling\EloquentThrottle';
+    protected static $throttlingModel = 'Modules\Core\Auth\Throttling\EloquentThrottle';
 
     /**
      * Returns an array of login column names.
@@ -433,7 +414,7 @@ class EloquentUser extends Model implements RoleableInterface, PermissibleInterf
     /**
      * Creates a permissions object.
      *
-     * @return \Cartalyst\Sentinel\Permissions\PermissionsInterface
+     * @return \Modules\Core\Auth\Permissions\PermissionsInterface
      */
     protected function createPermissions()
     {

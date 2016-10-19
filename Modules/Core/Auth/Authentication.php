@@ -2,6 +2,7 @@
 
 use InvalidArgumentException;
 use Illuminate\Events\Dispatcher;
+use Modules\Core\Auth\Persistences\PersistenceRepositoryInterface;
 use Modules\Core\Auth\Profiles\ProfileRepositoryInterface;
 use Modules\Core\Auth\Roles\RoleRepositoryInterface;
 use Modules\Core\Auth\Users\UserRepositoryInterface;
@@ -16,6 +17,12 @@ class Authentication {
      */
     protected $user;
 
+    /**
+     * The Persistence repository.
+     *
+     * @var \Modules\Core\Auth\Persistences\PersistenceRepositoryInterface
+     */
+    protected $persistences;
 
     /**
      * The Profile repository
@@ -72,24 +79,21 @@ class Authentication {
     /**
      * Create a new Sentinel instance.
      *
+     * @param Persistences\PersistenceRepositoryInterface $persistences
      * @param \Modules\Core\Auth\Users\UserRepositoryInterface $users
      * @param \Modules\Core\Auth\Roles\RoleRepositoryInterface $roles
-     * @param \Modules\Core\Auth\Profiles\ProfileRepositoryInterface $profiles
      * @param \Illuminate\Events\Dispatcher $dispatcher
      * @return \Modules\Core\Auth\Authentication
      */
     public function __construct(
+        PersistenceRepositoryInterface $persistences,
         UserRepositoryInterface $users,
         RoleRepositoryInterface $roles,
-        //ProfileRepositoryInterface $profiles,
         Dispatcher $dispatcher
     ) {
+        $this->persistences = $persistences;
         $this->users = $users;
-
         $this->roles = $roles;
-
-        //$this->profiles = $profiles;
-
         $this->dispatcher = $dispatcher;
     }
 
