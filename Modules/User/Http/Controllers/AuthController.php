@@ -5,6 +5,7 @@ namespace Modules\User\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\User\Http\Requests\RegisterRequest;
 
 class AuthController extends Controller
 {
@@ -13,47 +14,22 @@ class AuthController extends Controller
         return view('user::public.login');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
-    public function create()
+    public function getRegister()
     {
-        return view('user::create');
+        return view('user::public.register');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param  Request $request
-     * @return Response
-     */
-    public function store(Request $request)
+    public function postRegister(RegisterRequest $request)
     {
+        app('Modules\User\Services\UserRegistration')->register($request->all());
+
+        Flash::success(trans('user::messages.account created check email for activation'));
+
+        return redirect()->route('register');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @return Response
-     */
-    public function edit()
+    public function getReset()
     {
-        return view('user::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param  Request $request
-     * @return Response
-     */
-    public function update(Request $request)
-    {
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @return Response
-     */
-    public function destroy()
-    {
+        return view('user::public.reset.begin');
     }
 }

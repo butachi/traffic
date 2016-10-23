@@ -92,16 +92,16 @@ class UserServiceProvider extends ServiceProvider
 
         $this->app->bind(
             'Modules\User\Repositories\UserRepository',
-            "Modules\\User\\Repositories\\{$driver}\\PChiUserRepository"
+            "Modules\\User\\Repositories\\{$driver}\\UserRepository"
         );
 
         $this->app->bind(
             'Modules\User\Repositories\RoleRepository',
-            "Modules\\User\\Repositories\\{$driver}\\PChiRoleRepository"
+            "Modules\\User\\Repositories\\{$driver}\\RoleRepository"
         );
         $this->app->bind(
             'Modules\Core\Contracts\Authentication',
-            "Modules\\User\\Repositories\\{$driver}\\PChiAuthentication"
+            "Modules\\User\\Repositories\\{$driver}\\Authentication"
         );
     }
 
