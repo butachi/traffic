@@ -1,19 +1,19 @@
-<?php namespace Modules\User\Repositories\Sentinel;
+<?php namespace Modules\User\Repositories\Eloquent;
 
-use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+use Modules\Core\Facades\User;
 use Modules\User\Events\RoleWasUpdated;
 use Modules\User\Repositories\RoleRepository;
 
-class SentinelRoleRepository implements RoleRepository
+class EloquentRoleRepository implements RoleRepository
 {
     /**
-     * @var \Cartalyst\Sentinel\Roles\EloquentRole
+     * @var \Modules\Core\Auth\Roles\EloquentRole
      */
     protected $role;
 
     public function __construct()
     {
-        $this->role = Sentinel::getRoleRepository()->createModel();
+        $this->role = User::getRoleRepository()->createModel();
     }
 
     /**
@@ -80,6 +80,6 @@ class SentinelRoleRepository implements RoleRepository
      */
     public function findByName($name)
     {
-        return Sentinel::findRoleByName($name);
+        return User::findRoleByName($name);
     }
 }

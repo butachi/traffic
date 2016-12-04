@@ -14,6 +14,7 @@ interface RoleRepository
 
     /**
      * Create a role resource
+     * @param $data
      * @return mixed
      */
     public function create($data);

@@ -53,7 +53,7 @@ class UserRegistration
 
     private function assignUserToUsersGroup($user)
     {
-        $role = $this->role->findByName('User');
+        $role = $this->role->find('N1');
 
         $this->auth->assignRole($user, $role);
     }

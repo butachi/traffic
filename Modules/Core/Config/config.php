@@ -10,7 +10,7 @@ return [
     |
     */
 
-    'session' => 'cartalyst_sentinel',
+    'session' => 'butachi_pchi',
 
     /*
     |--------------------------------------------------------------------------
@@ -21,7 +21,7 @@ return [
     |
     */
 
-    'cookie' => 'cartalyst_sentinel',
+    'cookie' => 'butachi_pchi',
 
     /*
     |--------------------------------------------------------------------------
@@ -34,7 +34,7 @@ return [
 
     'users' => [
 
-        'model' => 'Cartalyst\Sentinel\Users\EloquentUser',
+        'model' => 'Modules\Core\Auth\Users\EloquentUser',
 
     ],
 

@@ -88,20 +88,20 @@ class UserServiceProvider extends ServiceProvider
 
     private function registerBindings()
     {
-        $driver = config('user.driver', 'PChi');
+        $driver = config('user.driver', 'Eloquent');
 
         $this->app->bind(
             'Modules\User\Repositories\UserRepository',
-            "Modules\\User\\Repositories\\{$driver}\\UserRepository"
+            "Modules\\User\\Repositories\\{$driver}\\{$driver}UserRepository"
         );
 
         $this->app->bind(
             'Modules\User\Repositories\RoleRepository',
-            "Modules\\User\\Repositories\\{$driver}\\RoleRepository"
+            "Modules\\User\\Repositories\\{$driver}\\{$driver}RoleRepository"
         );
         $this->app->bind(
             'Modules\Core\Contracts\Authentication',
-            "Modules\\User\\Repositories\\{$driver}\\Authentication"
+            "Modules\\User\\Repositories\\{$driver}\\{$driver}Authentication"
         );
     }
 

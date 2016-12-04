@@ -5,6 +5,7 @@ namespace Modules\User\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Laracasts\Flash\Flash;
 use Modules\User\Http\Requests\RegisterRequest;
 
 class AuthController extends Controller

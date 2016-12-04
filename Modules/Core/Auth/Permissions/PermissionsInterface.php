@@ -18,17 +18,23 @@
  * @link       http://cartalyst.com
  */
 
-namespace Modules\Core\Facades;
+namespace Modules\Core\Auth\Permissions;
 
-use Illuminate\Support\Facades\Facade;
-
-class Activation extends Facade
+interface PermissionsInterface
 {
     /**
-     * {@inheritDoc}
+     * Returns if access is available for all given permissions.
+     *
+     * @param  array|string  $permissions
+     * @return bool
      */
-    protected static function getFacadeAccessor()
-    {
-        return 'sentinel.activations';
-    }
+    public function hasAccess($permissions);
+
+    /**
+     * Returns if access is available for any given permissions.
+     *
+     * @param  array|string  $permissions
+     * @return bool
+     */
+    public function hasAnyAccess($permissions);
 }

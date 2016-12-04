@@ -1,12 +1,12 @@
-<?php namespace Modules\User\Repositories\PChi;
+<?php namespace Modules\User\Repositories\Eloquent;
 
-use Cartalyst\Sentinel\Checkpoints\NotActivatedException;
-use Cartalyst\Sentinel\Checkpoints\ThrottlingException;
+use Modules\Core\Auth\Checkpoints\NotActivatedException;
+use Modules\Core\Auth\Checkpoints\ThrottlingException;
 use Modules\Core\Contracts\Authentication;
-use Modules\Core\Facades\Sentinel;
+use Modules\Core\Facades\User;
 use Modules\User\Events\UserHasActivatedAccount;
 
-class PChiAuthentication implements Authentication
+class EloquentAuthentication implements Authentication
 {
     /**
      * Authenticate a user
@@ -17,7 +17,7 @@ class PChiAuthentication implements Authentication
     public function login(array $credentials, $remember = false)
     {
         try {
-            if (Sentinel::authenticate($credentials, $remember)) {
+            if (User::authenticate($credentials, $remember)) {
                 return false;
             }
             return 'Invalid login or password.';
@@ -37,7 +37,7 @@ class PChiAuthentication implements Authentication
      */
     public function register(array $user)
     {
-        return Sentinel::getUserRepository()->create((array) $user);
+        return User::getUserRepository()->create((array) $user);
     }
 
     /**
@@ -57,7 +57,7 @@ class PChiAuthentication implements Authentication
      */
     public function logout()
     {
-        return Sentinel::logout();
+        return User::logout();
     }
 
     /**
@@ -68,7 +68,7 @@ class PChiAuthentication implements Authentication
      */
     public function activate($userId, $code)
     {
-        $user = Sentinel::findById($userId);
+        $user = User::findById($userId);
 
         $success = Activation::complete($user, $code);
         if ($success) {
@@ -119,11 +119,11 @@ class PChiAuthentication implements Authentication
      */
     public function hasAccess($permission)
     {
-        if (! Sentinel::check()) {
+        if (! User::check()) {
             return false;
         }
 
-        return Sentinel::hasAccess($permission);
+        return User::hasAccess($permission);
     }
 
     /**
@@ -132,7 +132,7 @@ class PChiAuthentication implements Authentication
      */
     public function check()
     {
-        return Sentinel::check();
+        return User::check();
     }
 
     /**

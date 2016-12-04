@@ -9,10 +9,13 @@ class EloquentRole extends Model implements RoleInterface, PermissibleInterface
 {
     use PermissibleTrait;
 
+    protected $primaryKey = 'role_id';
+
+    public $incrementing = false;
     /**
      * {@inheritDoc}
      */
-    protected $table = 'roles';
+    protected $table = 'tbl_role';
 
     /**
      * {@inheritDoc}
@@ -37,7 +40,7 @@ class EloquentRole extends Model implements RoleInterface, PermissibleInterface
      */
     public function users()
     {
-        return $this->belongsToMany(static::$usersModel, 'role_users', 'role_id', 'user_id')->withTimestamps();
+        return $this->belongsToMany(static::$usersModel, 'tbl_user2role', 'role_id', 'user_id');
     }
 
     /**

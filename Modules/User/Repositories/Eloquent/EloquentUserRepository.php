@@ -1,27 +1,27 @@
-<?php namespace Modules\User\Repositories\Sentinel;
+<?php namespace Modules\User\Repositories\Eloquent;
 
-use Cartalyst\Sentinel\Laravel\Facades\Activation;
-use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+use Modules\Core\Facades\Activation;
+use Modules\Core\Facades\User;
 use Illuminate\Support\Facades\Hash;
 use Modules\User\Events\UserWasUpdated;
 use Modules\User\Exceptions\UserNotFoundException;
 use Modules\User\Repositories\UserRepository;
 
-class SentinelUserRepository implements UserRepository
+class EloquentUserRepository implements UserRepository
 {
     /**
-     * @var \Modules\User\Entities\Sentinel\User
+     * @var \Modules\Core\Auth\Users\EloquentUser
      */
     protected $user;
     /**
-     * @var \Cartalyst\Sentinel\Roles\EloquentRole
+     * @var \Modules\Core\Auth\Roles\EloquentRole
      */
     protected $role;
 
     public function __construct()
     {
-        $this->user = Sentinel::getUserRepository()->createModel();
-        $this->role = Sentinel::getRoleRepository()->createModel();
+        $this->user = User::getUserRepository()->createModel();
+        $this->role = User::getRoleRepository()->createModel();
     }
 
     /**

@@ -4,7 +4,7 @@ namespace Modules\Core\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class Sentinel extends Facade
+class User extends Facade
 {
     /**
      * {@inheritDoc}

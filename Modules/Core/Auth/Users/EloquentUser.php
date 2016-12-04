@@ -15,7 +15,7 @@ class EloquentUser extends Model implements RoleableInterface, PermissibleInterf
     /**
      * {@inheritDoc}
      */
-    protected $table = 'users';
+    protected $table = 'tbl_users';
 
     /**
      * {@inheritDoc}
@@ -97,7 +97,7 @@ class EloquentUser extends Model implements RoleableInterface, PermissibleInterf
      */
     public function roles()
     {
-        return $this->belongsToMany(static::$rolesModel, 'role_users', 'user_id', 'role_id')->withTimestamps();
+        return $this->belongsToMany(static::$rolesModel, 'tbl_user2role', 'user_id', 'role_id');
     }
 
     /**
