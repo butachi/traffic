@@ -17,7 +17,7 @@ class UserServiceProvider extends ServiceProvider
      * @var array
      */
     protected $providers = [
-        'PChi' => 'Modules\\Core\\Providers\\AuthServiceProvider',
+        'Sentinel' => 'Modules\\Core\\Providers\\AuthServiceProvider',
     ];
 
     /**
@@ -88,7 +88,7 @@ class UserServiceProvider extends ServiceProvider
 
     private function registerBindings()
     {
-        $driver = config('user.driver', 'Eloquent');
+        $driver = config('user.driver');
 
         $this->app->bind(
             'Modules\User\Repositories\UserRepository',
@@ -133,7 +133,7 @@ class UserServiceProvider extends ServiceProvider
 
     private function getUserPackageServiceProvider()
     {
-        $driver = config('user.driver', 'PChi');
+        $driver = config('user.driver');
 
         if (!isset($this->providers[$driver])) {
             throw new \Exception("Driver [{$driver}] does not exist");

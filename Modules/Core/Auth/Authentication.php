@@ -3,8 +3,8 @@
 use InvalidArgumentException;
 use Illuminate\Events\Dispatcher;
 use Modules\Core\Auth\Persistences\PersistenceRepositoryInterface;
-use Modules\Core\Auth\Profiles\ProfileRepositoryInterface;
 use Modules\Core\Auth\Roles\RoleRepositoryInterface;
+use Modules\Core\Auth\Users\UserInterface;
 use Modules\Core\Auth\Users\UserRepositoryInterface;
 use Modules\Core\Support\Traits\EventTrait;
 
@@ -183,10 +183,10 @@ class Authentication {
      */
     public function check()
     {
-
         if ($this->user !== null) {
             return $this->user;
         }
+
 
         if (! $code = $this->persistences->check()) {
             return false;

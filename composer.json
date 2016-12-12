@@ -10,7 +10,11 @@
         "nwidart/laravel-modules": "^1.13",
         "mcamara/laravel-localization": "1.1.*",
         "laracasts/flash": "^2.0",
-        "floatingpoint/stylist": "^0.4.0"
+        "floatingpoint/stylist": "^0.4.0",
+        "nwidart/laravel-menus": "^0.2.0",
+        "typicms/nestablecollection": "^1.1",
+        "maatwebsite/laravel-sidebar": "~2.1",
+        "dimsav/laravel-translatable": "^6.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -9,6 +9,7 @@
         "Modules\\Core\\Providers\\CoreServiceProvider",
         "Laracasts\\Flash\\FlashServiceProvider",
         "Mcamara\\LaravelLocalization\\LaravelLocalizationServiceProvider",
+        "Dimsav\\Translatable\\TranslatableServiceProvider",
         "FloatingPoint\\Stylist\\StylistServiceProvider"
     ],
     "aliases":{

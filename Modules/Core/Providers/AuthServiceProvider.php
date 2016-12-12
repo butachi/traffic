@@ -22,7 +22,7 @@ class AuthServiceProvider extends ServiceProvider{
         $this->registerRoles();
         //$this->registerCheckpoints();
         //$this->registerReminders();
-        $this->registerSentinel();
+        $this->registerAuthentication();
         //$this->setUserResolver();
     }
 
@@ -134,7 +134,7 @@ class AuthServiceProvider extends ServiceProvider{
             });
     }
 
-    public function registerSentinel()
+    public function registerAuthentication()
     {
         $this->app->singleton('authentication', function( $app ) {
             $auth = new Authentication(

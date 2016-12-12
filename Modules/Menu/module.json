@@ -1,0 +1,15 @@
+{
+    "name": "Menu",
+    "alias": "menu",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\Menu\\Providers\\MenuServiceProvider",
+        "Nwidart\\Menus\\MenusServiceProvider"
+    ],
+    "aliases":{
+        "Menu": "Nwidart\\Menus\\Facades\\Menu"
+    }
+}

@@ -10,7 +10,7 @@ return [
     |
     */
 
-    'session' => 'butachi_pchi',
+    'session' => 'butachi_bebuti',
 
     /*
     |--------------------------------------------------------------------------
@@ -21,7 +21,7 @@ return [
     |
     */
 
-    'cookie' => 'butachi_pchi',
+    'cookie' => 'butachi_bebuti',
 
     /*
     |--------------------------------------------------------------------------
@@ -76,6 +76,7 @@ return [
     */
     'middleware' => [
         'backend' => [
+            'web',
             'auth.admin',
             //'permissions',
         ],

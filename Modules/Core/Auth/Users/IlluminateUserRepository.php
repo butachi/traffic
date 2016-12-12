@@ -31,10 +31,10 @@ class IlluminateUserRepository implements UserRepositoryInterface
     /**
      * Create a new Illuminate user repository.
      *
-     * @param  \Modules\Core\Auth\Hashing\HasherInterface  $hasher
-     * @param  \Illuminate\Events\Dispatcher  $dispatcher
-     * @param  string  $model
-     * @return void
+     * @param  \Modules\Core\Auth\Hashing\HasherInterface $hasher
+     * @param  \Illuminate\Events\Dispatcher $dispatcher
+     * @param  string $model
+     * @return \Modules\Core\Auth\Users\IlluminateUserRepository
      */
     public function __construct(
         HasherInterface $hasher,

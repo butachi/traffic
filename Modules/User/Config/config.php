@@ -2,6 +2,8 @@
 
 return [
     'name' => 'User',
+
+    'driver' => 'Sentinel',
     /*
     |--------------------------------------------------------------------------
     | Define which route to redirect to after a successful login

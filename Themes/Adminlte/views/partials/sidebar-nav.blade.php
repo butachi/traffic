@@ -3,6 +3,7 @@
 
     <!-- sidebar: style can be found in sidebar.less  -->
     <section class="sidebar">
+        {!! $sidebar !!}
     </section>
     <!-- /.sidebar -->
 </aside>

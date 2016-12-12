@@ -2,17 +2,36 @@
 
 namespace Modules\User\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
 use Laracasts\Flash\Flash;
+use Modules\Core\Http\Controllers\BasePublicController;
+use Modules\User\Http\Requests\LoginRequest;
 use Modules\User\Http\Requests\RegisterRequest;
 
-class AuthController extends Controller
+class AuthController extends BasePublicController
 {
     public function getLogin()
     {
         return view('user::public.login');
+    }
+
+    public function postLogin(LoginRequest $request)
+    {
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->password,
+        ];
+        $remember = (bool) $request->get('remember_me', false);
+
+        $error = $this->auth->login($credentials, $remember);
+
+        if (!$error) {
+            Flash::success(trans('user::messages.successfully logged in'));
+            return redirect()->intended('/');
+        }
+
+        Flash::error($error);
+
+        return redirect()->back()->withInput();
     }
 
     public function getRegister()

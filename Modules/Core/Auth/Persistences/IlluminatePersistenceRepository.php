@@ -40,11 +40,11 @@ class IlluminatePersistenceRepository implements PersistenceRepositoryInterface
     /**
      * Create a new Sentinel persistence repository.
      *
-     * @param  \Modules\Core\Auth\Sessions\SessionInterface  $session
-     * @param  \Modules\Core\Auth\Cookies\CookieInterface  $cookie
-     * @param  string  $model
-     * @param  bool  $single
-     * @return void
+     * @param  \Modules\Core\Auth\Sessions\SessionInterface $session
+     * @param  \Modules\Core\Auth\Cookies\CookieInterface $cookie
+     * @param  string $model
+     * @param  bool $single
+     * @return \Modules\Core\Auth\Persistences\IlluminatePersistenceRepository
      */
     public function __construct(
         SessionInterface $session,
@@ -124,6 +124,7 @@ class IlluminatePersistenceRepository implements PersistenceRepositoryInterface
         $persistence = $this->createModel();
 
         $persistence->{$persistable->getPersistableKey()} = $persistable->getPersistableId();
+
         $persistence->code = $code;
 
         return $persistence->save();

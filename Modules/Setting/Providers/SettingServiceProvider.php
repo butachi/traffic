@@ -3,6 +3,7 @@
 namespace Modules\Setting\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Modules\Setting\Entities\Setting;
 use Modules\Setting\Repositories\Eloquent\EloquentSettingRepository;
 use Modules\Setting\Repositories\SettingRepository;
 use Modules\Setting\Support\Settings;

@@ -2,8 +2,11 @@
 
 namespace Modules\Core\Providers;
 
+use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
+use Maatwebsite\Sidebar\SidebarManager;
+use Modules\Core\Sidebar\AdminSidebar;
 
 class CoreServiceProvider extends ServiceProvider
 {
@@ -32,8 +35,10 @@ class CoreServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(SidebarManager $manager)
     {
+        //$manager->register(AdminSidebar::class);
+
         $this->registerMiddleware($this->app['router']);
         $this->registerConfig();
         $this->registerViews();

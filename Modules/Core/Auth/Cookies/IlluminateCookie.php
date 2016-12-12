@@ -25,15 +25,15 @@ class IlluminateCookie implements CookieInterface
      *
      * @var string
      */
-    protected $key = 'cartalyst_sentinel';
+    protected $key = 'butachi_bebuti';
 
     /**
      * Create a new Illuminate cookie driver.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Illuminate\Cookie\CookieJar  $jar
-     * @param  string  $key
-     * @return void
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Cookie\CookieJar $jar
+     * @param  string $key
+     * @return \Modules\Core\Auth\Cookies\IlluminateCookie
      */
     public function __construct(Request $request, CookieJar $jar, $key = null)
     {

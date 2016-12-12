@@ -8,6 +8,7 @@
 <div class="header">{{ trans('user::auth.login') }}</div>
 @include('flash::message')
 <form action="{{ route('login.post') }}" method="post">
+    {{ csrf_field() }}
     <div class="body bg-gray">
         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
             <input type="email" name="email" class="form-control"

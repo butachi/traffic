@@ -17,17 +17,18 @@ class IlluminateSession implements SessionInterface
      *
      * @var string
      */
-    protected $key = 'pChi_project';
+    protected $key = 'butachi_bebuti';
 
     /**
      * Create a new Illuminate Session driver.
      *
-     * @param  \Illuminate\Session\Store  $session
-     * @param  string  $key
-     * @return void
+     * @param  \Illuminate\Session\Store $session
+     * @param  string $key
+     * @return \Modules\Core\Auth\Sessions\IlluminateSession
      */
     public function __construct(SessionStore $session, $key = null)
     {
+        //dd($session);
         $this->session = $session;
 
         if (isset($key)) {
