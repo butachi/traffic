@@ -10,7 +10,8 @@
         "Laracasts\\Flash\\FlashServiceProvider",
         "Mcamara\\LaravelLocalization\\LaravelLocalizationServiceProvider",
         "Dimsav\\Translatable\\TranslatableServiceProvider",
-        "FloatingPoint\\Stylist\\StylistServiceProvider"
+        "FloatingPoint\\Stylist\\StylistServiceProvider",
+        "Maatwebsite\\Sidebar\\SidebarServiceProvider"
     ],
     "aliases":{
         "Flash": "Laracasts\\Flash\\Flash",

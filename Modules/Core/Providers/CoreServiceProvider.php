@@ -33,11 +33,12 @@ class CoreServiceProvider extends ServiceProvider
     /**
      * Boot the application events.
      *
+     * @param \Maatwebsite\Sidebar\SidebarManager $manager
      * @return void
      */
     public function boot(SidebarManager $manager)
     {
-        //$manager->register(AdminSidebar::class);
+        $manager->register(AdminSidebar::class);
 
         $this->registerMiddleware($this->app['router']);
         $this->registerConfig();

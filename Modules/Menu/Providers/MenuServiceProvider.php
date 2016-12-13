@@ -35,7 +35,62 @@ class MenuServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->registerTranslations();
+        $this->registerConfig();
+        $this->registerViews();
+
         $this->registerMenus();
+    }
+
+    /**
+     * Register config.
+     *
+     * @return void
+     */
+    protected function registerConfig()
+    {
+        $this->publishes([
+                __DIR__.'/../Config/config.php' => config_path('menu.php'),
+            ]);
+        $this->mergeConfigFrom(
+            __DIR__.'/../Config/config.php', 'menu'
+        );
+    }
+
+    /**
+     * Register views.
+     *
+     * @return void
+     */
+    public function registerViews()
+    {
+        $viewPath = base_path('resources/views/modules/menu');
+
+        $sourcePath = __DIR__.'/../Resources/views';
+
+        $this->publishes([
+                $sourcePath => $viewPath
+            ]);
+
+        $this->loadViewsFrom(array_merge(array_map(function ($path) {
+                        return $path . '/modules/menu';
+                    }, \Config::get('view.paths')), [$sourcePath]), 'menu');
+    }
+
+    /**
+     * Register translations.
+     *
+     * @return void
+     */
+    public function registerTranslations()
+    {
+        $langPath = base_path('resources/lang/modules/menu');
+
+        if (is_dir($langPath)) {
+            $this->loadTranslationsFrom($langPath, 'menu');
+        } else {
+            $this->loadTranslationsFrom(__DIR__ .'/../Resources/lang', 'menu');
+        }
     }
 
     /**
@@ -106,6 +161,7 @@ class MenuServiceProvider extends ServiceProvider
      * @param string $name
      * @param object $children
      * @param Builder|MenuItem $menu
+     * @param array $attribs
      */
     private function addChildrenToMenu($name, $children, $menu, $attribs = [])
     {
@@ -119,7 +175,7 @@ class MenuServiceProvider extends ServiceProvider
     /**
      * Add children to the given menu recursively
      * @param Menuitem $child
-     * @param PingpongMenuItem $sub
+     * @param \Nwidart\Menus\MenuItem $sub
      */
     private function addSubItemToMenu(Menuitem $child, NwidartMenuItem $sub)
     {

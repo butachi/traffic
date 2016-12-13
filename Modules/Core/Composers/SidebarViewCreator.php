@@ -21,14 +21,13 @@ class SidebarViewCreator
      */
     public function __construct(AdminSidebar $sidebar, SidebarRenderer $renderer)
     {
-        dd($sidebar);
         $this->sidebar = $sidebar;
         $this->renderer = $renderer;
     }
 
     public function create($view)
     {
-        $view->prefix = config('asgard.core.core.admin-prefix');
+        $view->prefix = config('admin-prefix');
         $view->sidebar = $this->renderer->render($this->sidebar);
     }
 }

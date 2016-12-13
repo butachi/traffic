@@ -1,6 +1,6 @@
 <?php namespace Modules\Menu\Providers;
 
-use Modules\Core\Providers\RoutingServiceProvider as CoreRoutingServiceProvider;
+use Modules\Core\Providers\RouteServiceProvider as CoreRoutingServiceProvider;
 
 class RouteServiceProvider extends CoreRoutingServiceProvider
 {
