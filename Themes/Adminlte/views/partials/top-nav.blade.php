@@ -47,7 +47,7 @@
                     </li>
                     <!-- Menu Footer-->
                     <li class="user-footer">
-                        <a href="" class="btn btn-default btn-flat">
+                        <a href="{{ URL::route('logout')  }}" class="btn btn-default btn-flat">
                             {{trans('core::core.general.sign out')}}
                         </a>
                     </li>

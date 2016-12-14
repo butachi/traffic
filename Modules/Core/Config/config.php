@@ -56,7 +56,7 @@ return [
     | Which administration theme to use for the back end interface
     |--------------------------------------------------------------------------
     */
-    'admin-theme' => 'AdminLTE',
+    'admin-theme' => 'OpenCart',
     /*
     |--------------------------------------------------------------------------
     | AdminLTE skin
