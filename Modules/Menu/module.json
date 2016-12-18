@@ -6,12 +6,12 @@
     "active": 1,
     "order": 0,
     "providers": [
-        "Modules\\Menu\\Providers\\MenuServiceProvider",
-        "Modules\\Menu\\Providers\\RouteServiceProvider",
-        "Modules\\Menu\\Providers\\EventServiceProvider",
-        "Nwidart\\Menus\\MenusServiceProvider"
+        //"Modules\\Menu\\Providers\\MenuServiceProvider",
+        //"Modules\\Menu\\Providers\\RouteServiceProvider",
+        //"Modules\\Menu\\Providers\\EventServiceProvider",
+        //"Nwidart\\Menus\\MenusServiceProvider"
     ],
     "aliases":{
-        "Menu": "Nwidart\\Menus\\Facades\\Menu"
+        //"Menu": "Nwidart\\Menus\\Facades\\Menu"
     }
 }

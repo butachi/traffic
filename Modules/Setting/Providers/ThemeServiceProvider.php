@@ -27,7 +27,7 @@ class ThemeServiceProvider extends ServiceProvider
             return $this->app['stylist']->activate($themeName, true);
         }
         //$themeName = $this->app['setting.settings']->get('core::template', null, 'Flatly');
-        return $this->app['stylist']->activate('Kuteshop', true);
+        return $this->app['stylist']->activate('Butachi', true);
     }
 
     /**

@@ -1,0 +1,15 @@
+{
+    "name": "Resport",
+    "alias": "resport",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\Resport\\Providers\\ResportServiceProvider"
+    ],
+    "aliases":{},
+    "files": [
+        "start.php"
+    ]
+}
