@@ -1,10 +1,10 @@
 {
-    "name": "nwidart/system",
+    "name": "butachi/system",
     "description": "",
     "authors": [
         {
-            "name": "Nicolas Widart",
-            "email": "n.widart@gmail.com"
+            "name": "Nguyen Tam Hung",
+            "email": "butachi@live.com"
         }
     ],
     "autoload": {

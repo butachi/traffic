@@ -6,9 +6,14 @@
     "active": 1,
     "order": 0,
     "providers": [
-        "Modules\\System\\Providers\\SystemServiceProvider"
+        "Modules\\System\\Providers\\UserServiceProvider",
+        "Modules\\System\\Providers\\RouteServiceProvider"
     ],
-    "aliases":{},
+    "aliases": {
+        "Sentinel": "Cartalyst\\Sentinel\\Laravel\\Facades\\Sentinel",
+        "Activation": "Cartalyst\\Sentinel\\Laravel\\Facades\\Activation",
+        "Reminder": "Cartalyst\\Sentinel\\Laravel\\Facades\\Reminder"
+    },
     "files": [
         "start.php"
     ]
