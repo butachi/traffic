@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'name' => 'User',
+    'name' => 'System',
 
     'driver' => 'Sentinel',
     /*

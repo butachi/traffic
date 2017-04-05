@@ -1,4 +1,4 @@
-<?php namespace Modules\User\Sidebar;
+<?php namespace Modules\System\Sidebar;
 
 use Maatwebsite\Sidebar\Group;
 use Maatwebsite\Sidebar\Item;
@@ -29,31 +29,43 @@ class SidebarExtender implements \Maatwebsite\Sidebar\SidebarExtender
      */
     public function extendWith(Menu $menu)
     {
-        $menu->group(trans('workshop::workshop.title'), function (Group $group) {
-
-            $group->item(trans('user::users.title.users'), function (Item $item) {
+        $menu->group(trans('system'), function (Group $group) {
+            $group->item(trans('system::system.title.system'), function (Item $item) {
                 $item->weight(0);
-                $item->icon('fa fa-user');
+                $item->icon('fa fa-cog fw');
                 $item->authorize(
                     $this->auth->hasAccess('user.users.index') or $this->auth->hasAccess('user.roles.index')
                 );
-
-                $item->item(trans('user::users.title.users'), function (Item $item) {
-                    $item->weight(0);
-                    $item->icon('fa fa-user');
-                    $item->route('admin.user.user.index');
+                $item->item(trans('system::settings.title.settings'), function (Item $item) {
+                        $item->weight(0);
+                        $item->icon('');
+                        $item->route('admin.user.role.index');
+                        $item->authorize(
+                            $this->auth->hasAccess('user.roles.index')
+                        );
+                    });
+                $item->item(trans('system::users.title.users'), function (Item $item) {
+                    $item->weight(1);
+                    $item->icon('');
                     $item->authorize(
                         $this->auth->hasAccess('user.users.index')
                     );
-                });
-
-                $item->item(trans('user::roles.title.roles'), function (Item $item) {
-                    $item->weight(1);
-                    $item->icon('fa fa-flag-o');
-                    $item->route('admin.user.role.index');
-                    $item->authorize(
-                        $this->auth->hasAccess('user.roles.index')
-                    );
+                    $item->item(trans('system::users.title.users'), function (Item $item) {
+                            $item->weight(1);
+                            $item->icon('');
+                            $item->route('admin.user.user.index');
+                            $item->authorize(
+                                $this->auth->hasAccess('user.roles.index')
+                            );
+                        });
+                    $item->item(trans('system::roles.title.roles'), function (Item $item) {
+                            $item->weight(1);
+                            $item->icon('');
+                            $item->route('admin.user.role.index');
+                            $item->authorize(
+                                $this->auth->hasAccess('user.roles.index')
+                            );
+                        });
                 });
             });
 

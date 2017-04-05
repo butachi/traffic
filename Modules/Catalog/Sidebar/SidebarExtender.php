@@ -5,7 +5,7 @@ use Maatwebsite\Sidebar\Item;
 use Maatwebsite\Sidebar\Menu;
 use Modules\Core\Contracts\Authentication;
 
-class SidebarExtender implements \Maatwebsite\Sidebar\SidebarExtender
+class SidebarExtender1 implements \Maatwebsite\Sidebar\SidebarExtender
 {
     /**
      * @var Authentication
@@ -30,28 +30,29 @@ class SidebarExtender implements \Maatwebsite\Sidebar\SidebarExtender
     public function extendWith(Menu $menu)
     {
         $menu->group(trans('catalog::workshop.title'), function (Group $group) {
-            $group->item(trans('user::users.title.users'), function (Item $item) {
+            $group->item(trans('catalog::users.title.users'), function (Item $item) {
                 $item->weight(0);
-                $item->icon('fa fa-user');
+                $item->icon('fa fa-tags fw');
                 $item->authorize(
-                    $this->auth->hasAccess('user.users.index') or $this->auth->hasAccess('user.roles.index')
+                    $this->auth->hasAccess('catalog.users.index')
+                    or $this->auth->hasAccess('catalog.roles.index')
                 );
 
-                $item->item(trans('user::users.title.users'), function (Item $item) {
+                $item->item(trans('catalog::users.title.users'), function (Item $item) {
                     $item->weight(0);
                     $item->icon('fa fa-user');
-                    $item->route('admin.user.user.index');
+                    $item->route('admin.catalog.user.index');
                     $item->authorize(
                         $this->auth->hasAccess('user.users.index')
                     );
                 });
 
-                $item->item(trans('user::roles.title.roles'), function (Item $item) {
+                $item->item(trans('catalog::roles.title.roles'), function (Item $item) {
                     $item->weight(1);
                     $item->icon('fa fa-flag-o');
-                    $item->route('admin.user.role.index');
+                    $item->route('admin.catalog.role.index');
                     $item->authorize(
-                        $this->auth->hasAccess('user.roles.index')
+                        $this->auth->hasAccess('catalog.roles.index')
                     );
                 });
             });
@@ -59,5 +60,6 @@ class SidebarExtender implements \Maatwebsite\Sidebar\SidebarExtender
         });
 
         return $menu;
+
     }
 }
