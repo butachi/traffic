@@ -39,7 +39,7 @@ class SidebarExtender implements \Maatwebsite\Sidebar\SidebarExtender
                 $item->item(trans('system::settings.title.settings'), function (Item $item) {
                         $item->weight(0);
                         $item->icon('');
-                        $item->route('admin.user.role.index');
+                        $item->route('admin.system.role.index');
                         $item->authorize(
                             $this->auth->hasAccess('user.roles.index')
                         );
@@ -53,7 +53,7 @@ class SidebarExtender implements \Maatwebsite\Sidebar\SidebarExtender
                     $item->item(trans('system::users.title.users'), function (Item $item) {
                             $item->weight(1);
                             $item->icon('');
-                            $item->route('admin.user.user.index');
+                            $item->route('admin.system.user.index');
                             $item->authorize(
                                 $this->auth->hasAccess('user.roles.index')
                             );
@@ -61,7 +61,7 @@ class SidebarExtender implements \Maatwebsite\Sidebar\SidebarExtender
                     $item->item(trans('system::roles.title.roles'), function (Item $item) {
                             $item->weight(1);
                             $item->icon('');
-                            $item->route('admin.user.role.index');
+                            $item->route('admin.system.role.index');
                             $item->authorize(
                                 $this->auth->hasAccess('user.roles.index')
                             );

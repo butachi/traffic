@@ -6,8 +6,9 @@
     "active": 1,
     "order": 0,
     "providers": [
-        "Modules\\System\\Providers\\UserServiceProvider",
-        "Modules\\System\\Providers\\RouteServiceProvider"
+        "Modules\\System\\Providers\\SystemServiceProvider",
+        "Modules\\System\\Providers\\RouteServiceProvider",
+        "Modules\\System\\Providers\\ThemeServiceProvider"
     ],
     "aliases": {
         "Sentinel": "Cartalyst\\Sentinel\\Laravel\\Facades\\Sentinel",

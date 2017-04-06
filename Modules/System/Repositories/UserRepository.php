@@ -1,8 +1,8 @@
-<?php namespace Modules\User\Repositories;
+<?php namespace Modules\System\Repositories;
 
 /**
  * Interface UserRepository
- * @package Modules\User\Repositories
+ * @package Modules\System\Repositories
  */
 interface UserRepository
 {

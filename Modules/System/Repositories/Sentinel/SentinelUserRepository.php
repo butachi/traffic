@@ -1,11 +1,11 @@
-<?php namespace Modules\User\Repositories\Sentinel;
+<?php namespace Modules\System\Repositories\Sentinel;
 
 use Modules\Core\Facades\Activation;
 use Modules\Core\Facades\User;
 use Illuminate\Support\Facades\Hash;
-use Modules\User\Events\UserWasUpdated;
-use Modules\User\Exceptions\UserNotFoundException;
-use Modules\User\Repositories\UserRepository;
+use Modules\System\Events\UserWasUpdated;
+use Modules\System\Exceptions\UserNotFoundException;
+use Modules\System\Repositories\UserRepository;
 
 class SentinelUserRepository implements UserRepository
 {

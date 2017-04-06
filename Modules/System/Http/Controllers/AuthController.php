@@ -11,7 +11,7 @@ class AuthController extends BasePublicController
 {
     public function getLogin()
     {
-        return view('user::public.login');
+        return view('system::public.login');
     }
 
     public function postLogin(LoginRequest $request)
@@ -36,7 +36,7 @@ class AuthController extends BasePublicController
 
     public function getRegister()
     {
-        return view('user::public.register');
+        return view('system::public.register');
     }
 
     public function postRegister(RegisterRequest $request)
@@ -50,7 +50,7 @@ class AuthController extends BasePublicController
 
     public function getReset()
     {
-        return view('user::public.reset.begin');
+        return view('system::public.reset.begin');
     }
 
     public function getLogout()
