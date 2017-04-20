@@ -12,6 +12,7 @@ interface UserRepository
      */
     public function all();
 
+    public function paginate($itmePerPage);
     /**
      * Create a user resource
      * @param  array $data

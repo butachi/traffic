@@ -33,6 +33,11 @@ class SentinelUserRepository implements UserRepository
         return $this->user->all();
     }
 
+    public function paginate($perPage)
+    {
+        return $this->user->paginate($perPage);
+    }
+
     /**
      * Create a user resource
      * @param $data

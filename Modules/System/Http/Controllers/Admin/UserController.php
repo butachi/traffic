@@ -49,7 +49,9 @@ class UserController extends BaseUserModuleController
      */
     public function index()
     {
-        $users = $this->user->all();
+        $itemsPerPage = config('system.item_per_page');
+
+        $users = $this->user->paginate($itemsPerPage);
 
         $currentUser = $this->auth->check();
 

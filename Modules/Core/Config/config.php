@@ -86,4 +86,6 @@ return [
         'api' => [
         ],
     ],
+
+    'items_per_page' => 1
 ];
