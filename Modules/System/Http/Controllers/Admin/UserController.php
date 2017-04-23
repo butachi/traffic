@@ -100,11 +100,12 @@ class UserController extends BaseUserModuleController
 
             return redirect()->route('admin.user.user.index');
         }
+
         $roles = $this->role->all();
 
         $currentUser = $this->auth->check();
 
-        return view('user::admin.users.edit', compact('user', 'roles', 'currentUser'));
+        return view('system::admin.users.edit', compact('user', 'roles', 'currentUser'));
     }
 
     /**

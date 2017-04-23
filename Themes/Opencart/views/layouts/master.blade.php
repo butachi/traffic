@@ -12,7 +12,7 @@
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <link href="{{ Theme::url('css/bootstrap.css') }}" type="text/css" rel="stylesheet" />
     <link href="{{ Theme::url('js/font-awesome/css/font-awesome.min.css') }}" type="text/css" rel="stylesheet" />
-    <link href="{{ Theme::url('js/jquery/datetimepicker/bootstrap-datetimepicker.min.css') }}" type="text/css" rel="stylesheet" media="screen" />
+    <link href="{{ Theme::url('js/jquery/datepicker/bootstrap-datepicker-customize.css') }}" type="text/css" />
     <link type="text/css" href="{{ Theme::url('css/stylesheet.css') }}" rel="stylesheet" media="screen" />
 
     {!! Theme::script('js/jquery/jquery-2.1.1.min.js') !!}
@@ -50,8 +50,8 @@
     @include('partials.footer')
 </div><!-- ./wrapper -->
 {!! Theme::script('js/bootstrap/js/bootstrap.min.js') !!}
-{!! Theme::script('js/jquery/datetimepicker/moment.js') !!}
-{!! Theme::script('js/jquery/datetimepicker/bootstrap-datetimepicker.min.js') !!}
+{!! Theme::script('js/jquery/datepicker/moment.js') !!}
+{!! Theme::script('js/jquery/datepicker/bootstrap-datepicker-customize.js') !!}
 {!! Theme::script('js/common.js') !!}
 
 @section('scripts')

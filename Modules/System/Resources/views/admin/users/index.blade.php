@@ -84,7 +84,7 @@
                                 <td class="medium" nowrap="">
                                     <div class="pull-right actions">
                                 <span class="actionImages">
-                                    <a id="Users_LISTVIEW_ROW_1_EDIT" href="index.php?module=Users&amp;parent=Settings&amp;view=Edit&amp;record=1">
+                                    <a id="Users_LISTVIEW_ROW_1_EDIT" href="{{ route('admin.system.user.edit', $user->id) }}">
                                         <i title="Edit" class="fa fa-pencil alignMiddle"></i></a>&nbsp;</span></div>
                                 </td>
                             </tr>
