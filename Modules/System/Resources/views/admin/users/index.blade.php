@@ -3,7 +3,8 @@
 @section('content-header')
 
     <div class="pull-right">
-        <a href="http://opencart.dev/admin/index.php?route=catalog/product/add&amp;token=JnDJfZ6r0kigtKrYek7213qHYu8ERLXn" data-toggle="tooltip" title="" class="btn btn-primary" data-original-title="Add New"><i class="fa fa-plus"></i></a>
+        <a href="{{ route('admin.system.user.create') }}" data-toggle="tooltip" title=""
+           class="btn btn-primary" data-original-title="Add New"><i class="fa fa-plus"></i></a>
         <button type="submit" form="form-product" formaction="http://opencart.dev/admin/index.php?route=catalog/product/copy&amp;token=JnDJfZ6r0kigtKrYek7213qHYu8ERLXn" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Copy"><i class="fa fa-copy"></i></button>
         <button type="button" data-toggle="tooltip" title="" class="btn btn-danger" onclick="confirm('Are you sure?') ? $('#form-product').submit() : false;" data-original-title="Delete"><i class="fa fa-trash-o"></i></button>
     </div>

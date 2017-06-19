@@ -25,7 +25,8 @@ class EloquentUser extends Model implements RoleableInterface, PermissibleInterf
         'password',
         'last_name',
         'first_name',
-        'permissions',
+        'is_admin',
+        'language',
     ];
 
     /**
@@ -97,7 +98,7 @@ class EloquentUser extends Model implements RoleableInterface, PermissibleInterf
      */
     public function roles()
     {
-        return $this->belongsToMany(static::$rolesModel, 'tbl_user2role', 'user_id', 'role_id');
+        return $this->belongsToMany('Modules\Core\Auth\Roles\EloquentRole', 'tbl_user2role', 'user_id', 'role_id');
     }
 
     /**

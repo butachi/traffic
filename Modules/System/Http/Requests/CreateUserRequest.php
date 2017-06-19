@@ -1,4 +1,4 @@
-<?php namespace Modules\User\Http\Requests;
+<?php namespace Modules\System\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -7,10 +7,9 @@ class CreateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required|unique:users|email',
+            'email' => 'required|unique:tbl_users|email',
             'password' => 'required|min:3|confirmed',
+            'roleid' => 'required',
         ];
     }
 

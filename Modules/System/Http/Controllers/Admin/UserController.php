@@ -65,9 +65,9 @@ class UserController extends BaseUserModuleController
      */
     public function create()
     {
-        $roles = $this->role->all();
+        //$roles = $this->role->all();
 
-        return view('user::admin.users.create', compact('roles'));
+        return view('system::admin.users.create');
     }
 
     /**
@@ -80,7 +80,7 @@ class UserController extends BaseUserModuleController
     {
         $data = $this->mergeRequestWithPermissions($request);
 
-        $this->user->createWithRoles($data, $request->roles, true);
+        $this->user->createWithRoles($data, $request->roleid, true);
 
         flash(trans('user::messages.user created'));
 

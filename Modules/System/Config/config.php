@@ -11,5 +11,5 @@ return [
     */
     'redirect_route_after_login' => 'homepage',
 
-    'item_per_page' => 1
+    'item_per_page' => 20
 ];

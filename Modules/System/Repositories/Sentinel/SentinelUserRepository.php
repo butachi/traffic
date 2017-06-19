@@ -51,16 +51,16 @@ class SentinelUserRepository implements UserRepository
     /**
      * Create a user and assign roles to it
      * @param  array $data
-     * @param  array $roles
+     * @param  array $role
      * @param bool $activated
      */
-    public function createWithRoles($data, $roles, $activated = false)
+    public function createWithRoles($data, $role, $activated = false)
     {
         $this->hashPassword($data);
         $user = $this->create((array) $data);
 
-        if (!empty($roles)) {
-            $user->roles()->attach($roles);
+        if ($role) {
+            $user->roles()->attach($role);
         }
 
         if ($activated) {

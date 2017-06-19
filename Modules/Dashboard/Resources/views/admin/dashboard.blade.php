@@ -5,7 +5,6 @@
         {{ trans('dashboard::dashboard.name') }}
     </h1>
     <div class="btn-group pull-right">
-
     </div>
     <div class="clearfix"></div>
 @stop
