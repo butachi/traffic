@@ -98,7 +98,7 @@ class EloquentUser extends Model implements RoleableInterface, PermissibleInterf
      */
     public function roles()
     {
-        return $this->belongsToMany('Modules\Core\Auth\Roles\EloquentRole', 'tbl_user2role', 'user_id', 'role_id');
+        return $this->belongsToMany(static::$rolesModel, 'tbl_user2role', 'user_id', 'role_id');
     }
 
     /**
@@ -382,6 +382,7 @@ class EloquentUser extends Model implements RoleableInterface, PermissibleInterf
         $methods = ['hasAccess', 'hasAnyAccess'];
 
         if (in_array($method, $methods)) {
+
             $permissions = $this->getPermissionsInstance();
 
             return call_user_func_array([$permissions, $method], $parameters);
