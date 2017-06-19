@@ -15,7 +15,7 @@ class EloquentPersistence extends Model implements PersistenceInterface
      *
      * @var string
      */
-    protected static $usersModel = 'Modules\Core\Auth\Users\EloquentUser';
+    protected static $usersModel = 'Modules\System\Entities\Users\EloquentUser';
 
     /**
      * {@inheritDoc}

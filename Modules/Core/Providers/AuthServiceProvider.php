@@ -5,9 +5,9 @@ use Modules\Core\Auth\Authentication;
 use Modules\Core\Auth\Cookies\IlluminateCookie;
 use Modules\Core\Auth\Hashing\NativeHasher;
 use Modules\Core\Auth\Persistences\IlluminatePersistenceRepository;
-use Modules\Core\Auth\Roles\IlluminateRoleRepository;
+use Modules\System\Entities\Roles\IlluminateRoleRepository;
 use Modules\Core\Auth\Sessions\IlluminateSession;
-use Modules\Core\Auth\Users\IlluminateUserRepository;
+use Modules\System\Entities\Users\IlluminateUserRepository;
 
 class AuthServiceProvider extends ServiceProvider{
     public function boot()
@@ -122,7 +122,6 @@ class AuthServiceProvider extends ServiceProvider{
     {
         $this->app->singleton('auth.roles', function ($app) {
                 $config = $app['config']->get('core');
-
                 $model = array_get($config, 'roles.model');
                 $users = array_get($config, 'users.model');
 

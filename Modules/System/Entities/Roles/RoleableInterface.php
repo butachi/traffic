@@ -1,5 +1,5 @@
 <?php
-namespace Modules\Core\Auth\Roles;
+namespace Modules\System\Entities\Roles;
 
 interface RoleableInterface
 {

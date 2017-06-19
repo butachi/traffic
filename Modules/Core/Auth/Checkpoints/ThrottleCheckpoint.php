@@ -2,7 +2,7 @@
 namespace Modules\Core\Auth\Checkpoints;
 
 use Modules\Core\Auth\Throttling\ThrottleRepositoryInterface;
-use Modules\Core\Auth\Users\UserInterface;
+use Modules\System\Entities\Users\UserInterface;
 
 class ThrottleCheckpoint implements CheckpointInterface
 {
@@ -71,7 +71,7 @@ class ThrottleCheckpoint implements CheckpointInterface
      * Checks the throttling status of the given user.
      *
      * @param  string  $action
-     * @param  \Modules\Core\Auth\Users\UserInterface|null  $user
+     * @param  \Modules\System\Entities\Users\UserInterface|null  $user
      * @return bool
      */
     protected function checkThrottling($action, UserInterface $user = null)

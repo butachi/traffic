@@ -78,7 +78,11 @@ abstract class RouteServiceProvider extends ServiceProvider {
         $backend = $this->getBackendRoute();
 
         if ($backend && file_exists($backend)) {
-            $router->group(['namespace' => 'Admin', 'prefix' => config('core.admin-prefix'), 'middleware' => config('core.middleware.backend', [])], function (Router $router) use ($backend) {
+            $router->group([
+                    'namespace' => 'Admin',
+                    'prefix' => config('core.admin-prefix'),
+                    'middleware' => config('core.middleware.backend', [])
+                ], function (Router $router) use ($backend) {
                     require $backend;
                 });
         }

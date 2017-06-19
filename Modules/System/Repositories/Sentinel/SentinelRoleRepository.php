@@ -7,7 +7,7 @@ use Modules\System\Repositories\RoleRepository;
 class SentinelRoleRepository implements RoleRepository
 {
     /**
-     * @var \Modules\Core\Auth\Roles\EloquentRole
+     * @var \Modules\System\Entities\Roles\EloquentRole
      */
     protected $role;
 

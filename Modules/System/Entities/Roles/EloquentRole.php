@@ -1,5 +1,5 @@
 <?php
-namespace Modules\Core\Auth\Roles;
+namespace Modules\System\Entities\Roles;
 
 use Modules\Core\Auth\Permissions\PermissibleInterface;
 use Modules\Core\Auth\Permissions\PermissibleTrait;
@@ -31,7 +31,14 @@ class EloquentRole extends Model implements RoleInterface, PermissibleInterface
      *
      * @var string
      */
-    protected static $usersModel = 'Modules\Core\Auth\Users\EloquentUser';
+    protected static $usersModel = 'Modules\System\Entities\Users\EloquentUser';
+
+    /**
+     * The Eloquent profiles model name
+     *
+     * @var string
+     */
+    protected static $profileModel = 'Modules\System\Entities\Profiles\EloquentProfile';
 
     /**
      * The Users relationship.
@@ -43,26 +50,9 @@ class EloquentRole extends Model implements RoleInterface, PermissibleInterface
         return $this->belongsToMany(static::$usersModel, 'tbl_user2role', 'role_id', 'user_id');
     }
 
-    /**
-     * Get mutator for the "permissions" attribute.
-     *
-     * @param  mixed  $permissions
-     * @return array
-     */
-    public function getPermissionsAttribute($permissions)
+    public function profiles()
     {
-        return $permissions ? json_decode($permissions, true) : [];
-    }
-
-    /**
-     * Set mutator for the "permissions" attribute.
-     *
-     * @param  mixed  $permissions
-     * @return void
-     */
-    public function setPermissionsAttribute(array $permissions)
-    {
-        $this->attributes['permissions'] = $permissions ? json_encode($permissions) : '';
+        return $this->belongsToMany(static::$profileModel, 'tbl_role2profile', 'role_id', 'profile_id');
     }
 
     /**

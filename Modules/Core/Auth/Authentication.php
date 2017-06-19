@@ -3,9 +3,9 @@
 use InvalidArgumentException;
 use Illuminate\Events\Dispatcher;
 use Modules\Core\Auth\Persistences\PersistenceRepositoryInterface;
-use Modules\Core\Auth\Roles\RoleRepositoryInterface;
-use Modules\Core\Auth\Users\UserInterface;
-use Modules\Core\Auth\Users\UserRepositoryInterface;
+use Modules\System\Entities\Roles\RoleRepositoryInterface;
+use Modules\System\Entities\Users\UserInterface;
+use Modules\System\Entities\Users\UserRepositoryInterface;
 use Modules\Core\Support\Traits\EventTrait;
 
 class Authentication {
@@ -13,7 +13,7 @@ class Authentication {
 
     /**
      * The current cached, logged in user
-     * @var \Modules\Core\Auth\Users\UserInterface
+     * @var \Modules\System\Entities\Users\UserInterface
      */
     protected $user;
 
@@ -37,7 +37,7 @@ class Authentication {
     protected $users;
 
     /**
-     * @var \Modules\Core\Auth\Roles\RoleRepositoryInterface
+     * @var \Modules\System\Entities\Roles\RoleRepositoryInterface
      */
     protected $roles;
 
@@ -80,8 +80,8 @@ class Authentication {
      * Create a new Sentinel instance.
      *
      * @param Persistences\PersistenceRepositoryInterface $persistences
-     * @param \Modules\Core\Auth\Users\UserRepositoryInterface $users
-     * @param \Modules\Core\Auth\Roles\RoleRepositoryInterface $roles
+     * @param \Modules\System\Entities\Users\UserRepositoryInterface $users
+     * @param \Modules\System\Entities\Roles\RoleRepositoryInterface $roles
      * @param \Illuminate\Events\Dispatcher $dispatcher
      * @return \Modules\Core\Auth\Authentication
      */
@@ -103,7 +103,7 @@ class Authentication {
      *
      * @param  array  $credentials
      * @param  \Closure|bool  $callback
-     * @return \Modules\Core\Auth\Users\UserInteface|bool
+     * @return \Modules\System\Entities\Users\UserInteface|bool
      * @throws \InvalidArgumentException
      */
     public function register(array $credentials, $callback = null)
@@ -137,7 +137,7 @@ class Authentication {
      * Registers and activates the user.
      *
      * @param  array  $credentials
-     * @return \Modules\Core\Auth\Users\UserInterface|bool
+     * @return \Modules\System\Entities\Users\UserInterface|bool
      */
     public function registerAndActivate(array $credentials)
     {
@@ -179,7 +179,7 @@ class Authentication {
     /**
      * Checks to see if a user is logged in.
      *
-     * @return \Modules\Core\Auth\Users\UserInterface|bool
+     * @return \Modules\System\Entities\Users\UserInterface|bool
      */
     public function check()
     {
@@ -206,7 +206,7 @@ class Authentication {
     /**
      * Checks to see if a user is logged in, bypassing checkpoints
      *
-     * @return \Modules\Core\Auth\Users\UserInterface|bool
+     * @return \Modules\System\Entities\Users\UserInterface|bool
      */
     public function forceCheck()
     {
@@ -218,7 +218,7 @@ class Authentication {
     /**
      * Checks if we are currently a guest.
      *
-     * @return \Modules\Core\Auth\Users\UserInterface|bool
+     * @return \Modules\System\Entities\Users\UserInterface|bool
      */
     public function guest()
     {
@@ -228,10 +228,10 @@ class Authentication {
     /**
      * Authenticates a user, with "remember" flag.
      *
-     * @param  \Modules\Core\Auth\Users\UserInterface|array  $credentials
+     * @param  \Modules\System\Entities\Users\UserInterface|array  $credentials
      * @param  bool  $remember
      * @param  bool  $login
-     * @return \Modules\Core\Auth\Users\UserInterface|bool
+     * @return \Modules\System\Entities\Users\UserInterface|bool
      */
     public function authenticate($credentials, $remember = false, $login = true)
     {
@@ -276,8 +276,8 @@ class Authentication {
     /**
      * Authenticates a user, with the "remember" flag.
      *
-     * @param  \Modules\Core\Auth\Users\UserInterface|array  $credentials
-     * @return \Modules\Core\Auth\Users\UserInterface|bool
+     * @param  \Modules\System\Entities\Users\UserInterface|array  $credentials
+     * @return \Modules\System\Entities\Users\UserInterface|bool
      */
     public function authenticateAndRemember($credentials)
     {
@@ -287,9 +287,9 @@ class Authentication {
     /**
      * Forces an authentication to bypass checkpoints.
      *
-     * @param  \Modules\Core\Auth\Users\UserInterface|array  $credentials
+     * @param  \Modules\System\Entities\Users\UserInterface|array  $credentials
      * @param  bool  $remember
-     * @return \Modules\Core\Auth\Users\UserInterface|bool
+     * @return \Modules\System\Entities\Users\UserInterface|bool
      */
     public function forceAuthenticate($credentials, $remember = false)
     {
@@ -301,8 +301,8 @@ class Authentication {
     /**
      * Forces an authentication to bypass checkpoints, with the "remember" flag.
      *
-     * @param  \Modules\Core\Auth\Users\UserInterface|array  $credentials
-     * @return \Modules\Core\Auth\Users\UserInterface|bool
+     * @param  \Modules\System\Entities\Users\UserInterface|array  $credentials
+     * @return \Modules\System\Entities\Users\UserInterface|bool
      */
     public function forceAuthenticateAndRemember($credentials)
     {
@@ -312,8 +312,8 @@ class Authentication {
     /**
      * Attempt a stateless authentication.
      *
-     * @param  \Modules\Core\Auth\Users\UserInterface|array  $credentials
-     * @return \Modules\Core\Auth\Users\UserInterface|bool
+     * @param  \Modules\System\Entities\Users\UserInterface|array  $credentials
+     * @return \Modules\System\Entities\Users\UserInterface|bool
      */
     public function stateless($credentials)
     {
@@ -428,9 +428,9 @@ class Authentication {
     /**
      * Persists a login for the given user.
      *
-     * @param  \Modules\Core\Auth\Users\UserInterface  $user
+     * @param  \Modules\System\Entities\Users\UserInterface  $user
      * @param  bool  $remember
-     * @return \Modules\Core\Auth\Users\UserInterface|bool
+     * @return \Modules\System\Entities\Users\UserInterface|bool
      */
     public function login(UserInterface $user, $remember = false)
     {
@@ -450,8 +450,8 @@ class Authentication {
     /**
      * Persists a login for the given user, with the "remember" flag.
      *
-     * @param  \Modules\Core\Auth\Users\UserInterface  $user
-     * @return \Modules\Core\Auth\Users\UserInterface|bool
+     * @param  \Modules\System\Entities\Users\UserInterface  $user
+     * @return \Modules\System\Entities\Users\UserInterface|bool
      */
     public function loginAndRemember(UserInterface $user)
     {
@@ -461,7 +461,7 @@ class Authentication {
     /**
      * Logs the current user out.
      *
-     * @param  \Modules\Core\Auth\Users\UserInterface  $user
+     * @param  \Modules\System\Entities\Users\UserInterface  $user
      * @param  bool  $everywhere
      * @return bool
      */
@@ -582,7 +582,7 @@ class Authentication {
      * the cycle fails.
      *
      * @param  string  $method
-     * @param  \Modules\Core\Auth\Users\UserInterface  $user
+     * @param  \Modules\System\Entities\Users\UserInterface  $user
      * @param  bool  $halt
      * @return bool
      */
@@ -607,7 +607,7 @@ class Authentication {
      * Returns the currently logged in user, lazily checking for it.
      *
      * @param  bool  $check
-     * @return \Modules\Core\Auth\Users\UserInterface
+     * @return \Modules\System\Entities\Users\UserInterface
      */
     public function getUser($check = true)
     {
@@ -621,7 +621,7 @@ class Authentication {
     /**
      * Sets the user associated with Sentinel (does not log in).
      *
-     * @param  \Modules\Core\Auth\Users\UserInterface  $user
+     * @param  \Modules\System\Entities\Users\UserInterface  $user
      * @return void
      */
     public function setUser(UserInterface $user)
@@ -632,7 +632,7 @@ class Authentication {
     /**
      * Returns the user repository.
      *
-     * @return \Modules\Core\Auth\Users\UserRepositoryInterface
+     * @return \Modules\System\Entities\Users\UserRepositoryInterface
      */
     public function getUserRepository()
     {
@@ -642,7 +642,7 @@ class Authentication {
     /**
      * Sets the user repository.
      *
-     * @param  \Modules\Core\Auth\Users\UserRepositoryInterface  $users
+     * @param  \Modules\System\Entities\Users\UserRepositoryInterface  $users
      * @return void
      */
     public function setUserRepository(UserRepositoryInterface $users)
@@ -655,7 +655,7 @@ class Authentication {
     /**
      * Returns the role repository.
      *
-     * @return \Modules\Core\Auth\Roles\RoleRepositoryInterface
+     * @return \Modules\System\Entities\Roles\RoleRepositoryInterface
      */
     public function getRoleRepository()
     {
@@ -665,7 +665,7 @@ class Authentication {
     /**
      * Sets the role repository.
      *
-     * @param  \Modules\Core\Auth\Roles\RoleRepositoryInterface  $roles
+     * @param  \Modules\System\Entities\Roles\RoleRepositoryInterface  $roles
      * @return void
      */
     public function setRoleRepository(RoleRepositoryInterface $roles)

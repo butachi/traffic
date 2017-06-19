@@ -2,7 +2,7 @@
 
 namespace Modules\Core\Auth\Checkpoints;
 
-use Modules\Core\Auth\Users\UserInterface;
+use Modules\System\Entities\Users\UserInterface;
 
 trait AuthenticatedCheckpoint
 {

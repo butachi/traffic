@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Core\Auth\Users;
+namespace Modules\System\Entities\Users;
 
 use Carbon\Carbon;
 use Modules\Core\Auth\Hashing\HasherInterface;
@@ -26,7 +26,7 @@ class IlluminateUserRepository implements UserRepositoryInterface
      *
      * @var string
      */
-    protected $model = 'Modules\Core\Auth\Users\EloquentUser';
+    protected $model = 'Modules\System\Entities\Users\EloquentUser';
 
     /**
      * Create a new Illuminate user repository.
@@ -34,7 +34,7 @@ class IlluminateUserRepository implements UserRepositoryInterface
      * @param  \Modules\Core\Auth\Hashing\HasherInterface $hasher
      * @param  \Illuminate\Events\Dispatcher $dispatcher
      * @param  string $model
-     * @return \Modules\Core\Auth\Users\IlluminateUserRepository
+     * @return \Modules\System\Entities\Users\IlluminateUserRepository
      */
     public function __construct(
         HasherInterface $hasher,
@@ -272,7 +272,7 @@ class IlluminateUserRepository implements UserRepositoryInterface
     /**
      * Fills a user with the given credentials, intelligently.
      *
-     * @param  \Modules\Core\Auth\Users\UserInterface  $user
+     * @param  \Modules\System\Entities\Users\UserInterface  $user
      * @param  array  $credentials
      * @return void
      */
