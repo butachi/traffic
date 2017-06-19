@@ -1,11 +1,11 @@
 <?php
-namespace Modules\Core\Auth\Users;
+namespace Modules\System\Entities\Users;
 
 use Modules\Core\Auth\Permissions\PermissibleInterface;
 use Modules\Core\Auth\Permissions\PermissibleTrait;
 use Modules\Core\Auth\Persistences\PersistableInterface;
-use Modules\Core\Auth\Roles\RoleableInterface;
-use Modules\Core\Auth\Roles\RoleInterface;
+use Modules\System\Entities\Roles\RoleableInterface;
+use Modules\System\Entities\Roles\RoleInterface;
 use Illuminate\Database\Eloquent\Model;
 
 class EloquentUser extends Model implements RoleableInterface, PermissibleInterface, PersistableInterface, UserInterface
@@ -51,7 +51,7 @@ class EloquentUser extends Model implements RoleableInterface, PermissibleInterf
      *
      * @var string
      */
-    protected static $rolesModel = 'Modules\Core\Auth\Roles\EloquentRole';
+    protected static $rolesModel = 'Modules\System\Entities\Roles\EloquentRole';
 
     /**
      * The Eloquent persistences model name.
@@ -139,28 +139,6 @@ class EloquentUser extends Model implements RoleableInterface, PermissibleInterf
     public function throttle()
     {
         return $this->hasMany(static::$throttlingModel, 'user_id');
-    }
-
-    /**
-     * Get mutator for the "permissions" attribute.
-     *
-     * @param  mixed  $permissions
-     * @return array
-     */
-    public function getPermissionsAttribute($permissions)
-    {
-        return $permissions ? json_decode($permissions, true) : [];
-    }
-
-    /**
-     * Set mutator for the "permissions" attribute.
-     *
-     * @param  mixed  $permissions
-     * @return void
-     */
-    public function setPermissionsAttribute(array $permissions)
-    {
-        $this->attributes['permissions'] = $permissions ? json_encode($permissions) : '';
     }
 
     /**
@@ -419,14 +397,14 @@ class EloquentUser extends Model implements RoleableInterface, PermissibleInterf
      */
     protected function createPermissions()
     {
-        $userPermissions = $this->permissions;
-
         $rolePermissions = [];
-
         foreach ($this->roles as $role) {
-            $rolePermissions[] = $role->permissions;
+            foreach ($role->profiles as $profile) {
+                dd($profile->utilities);
+            }
+            $rolePermissions[] = $role->profiles;
         }
 
-        return new static::$permissionsClass($userPermissions, $rolePermissions);
+        return new static::$permissionsClass($rolePermissions);
     }
 }

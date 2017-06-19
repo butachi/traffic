@@ -10,11 +10,11 @@ use Modules\System\Repositories\UserRepository;
 class SentinelUserRepository implements UserRepository
 {
     /**
-     * @var \Modules\Core\Auth\Users\EloquentUser
+     * @var \Modules\System\Entities\Users\EloquentUser
      */
     protected $user;
     /**
-     * @var \Modules\Core\Auth\Roles\EloquentRole
+     * @var \Modules\System\Entities\Roles\EloquentRole
      */
     protected $role;
 

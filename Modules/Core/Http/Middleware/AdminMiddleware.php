@@ -59,10 +59,10 @@ class AdminMiddleware
         }
 
         // Check if the user has access to the dashboard page
-        /*if (! $this->auth->hasAccess('dashboard.index')) {
+        if (! $this->auth->hasAccess('dashboard.index')) {
             // Show the insufficient permissions page
             return $this->application->abort(403);
-        }*/
+        }
 
         return $next($request);
     }

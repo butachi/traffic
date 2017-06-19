@@ -1,7 +1,7 @@
 <?php
 namespace Modules\Core\Auth\Checkpoints;
 
-use Modules\Core\Auth\Users\UserInterface;
+use Modules\System\Entities\Users\UserInterface;
 use RuntimeException;
 
 class NotActivatedException extends RuntimeException
@@ -9,14 +9,14 @@ class NotActivatedException extends RuntimeException
     /**
      * The user which caused the exception.
      *
-     * @var \Modules\Core\Auth\Users\UserInterface
+     * @var \Modules\System\Entities\Users\UserInterface
      */
     protected $user;
 
     /**
      * Returns the user.
      *
-     * @return \Modules\Core\Auth\Users\UserInterface
+     * @return \Modules\System\Entities\Users\UserInterface
      */
     public function getUser()
     {
@@ -26,7 +26,7 @@ class NotActivatedException extends RuntimeException
     /**
      * Sets the user associated with Sentinel (does not log in).
      *
-     * @param  \Modules\Core\Auth\Users\UserInterface
+     * @param  \Modules\System\Entities\Users\UserInterface
      * @return void
      */
     public function setUser(UserInterface $user)

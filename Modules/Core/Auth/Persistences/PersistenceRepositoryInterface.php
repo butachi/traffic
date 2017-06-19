@@ -22,7 +22,7 @@ interface PersistenceRepositoryInterface
      * Finds a user by persistence code.
      *
      * @param  string  $code
-     * @return \Modules\Core\Auth\Users\UserInterface|false
+     * @return \Modules\System\Entities\Users\UserInterface|false
      */
     public function findUserByPersistenceCode($code);
 

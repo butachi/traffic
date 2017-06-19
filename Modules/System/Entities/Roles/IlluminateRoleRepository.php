@@ -1,5 +1,5 @@
 <?php
-namespace Modules\Core\Auth\Roles;
+namespace Modules\System\Entities\Roles;
 
 use Modules\Core\Support\Traits\RepositoryTrait;
 
@@ -12,13 +12,13 @@ class IlluminateRoleRepository implements RoleRepositoryInterface
      *
      * @var string
      */
-    protected $model = 'Modules\Core\Auth\Roles\EloquentRole';
+    protected $model = 'Modules\System\Entities\Roles\EloquentRole';
 
     /**
      * Create a new Illuminate role repository.
      *
      * @param  string $model
-     * @return \Modules\Core\Auth\Roles\IlluminateRoleRepository
+     * @return \Modules\System\Entities\Roles\IlluminateRoleRepository
      */
     public function __construct($model = null)
     {

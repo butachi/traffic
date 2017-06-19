@@ -1,7 +1,7 @@
 <?php
 namespace Modules\Core\Auth\Checkpoints;
 
-use Modules\Core\Auth\Users\UserInterface;
+use Modules\System\Entities\Users\UserInterface;
 
 class ActivationCheckpoint implements CheckpointInterface
 {
@@ -44,7 +44,7 @@ class ActivationCheckpoint implements CheckpointInterface
     /**
      * Checks the activation status of the given user.
      *
-     * @param  \Modules\Core\Auth\Users\UserInterface  $user
+     * @param  \Modules\System\Entities\Users\UserInterface  $user
      * @return bool
      * @throws \Modules\Core\Auth\Checkpoints\NotActivatedException
      */

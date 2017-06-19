@@ -34,10 +34,52 @@ return [
 
     'users' => [
 
-        'model' => 'Modules\Core\Auth\Users\EloquentUser',
+        'model' => 'Modules\System\Entities\Users\EloquentUser',
 
     ],
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Roles
+    |--------------------------------------------------------------------------
+    |
+    | Please provide the role model used in Sentinel.
+    |
+    */
+
+    'roles' => [
+
+        'model' => 'Modules\System\Entities\Roles\EloquentRole',
+
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Permissions
+    |--------------------------------------------------------------------------
+    |
+    | Here you may specify the permissions class. Sentinel ships with two
+    | permission types.
+    |
+    | 'Cartalyst\Sentinel\Permissions\StandardPermissions'
+    | 'Cartalyst\Sentinel\Permissions\StrictPermissions'
+    |
+    | "StandardPermissions" will assign a higher priority to the user
+    | permissions over role permissions, once a user is allowed or denied
+    | a specific permission, it will be used regardless of the
+    | permissions set on the role.
+    |
+    | "StrictPermissions" will deny any permission as soon as it finds it
+    | rejected on either the user or any of the assigned roles.
+    |
+    */
+
+    'permissions' => [
+
+        'class' => 'Modules\Core\Auth\Permissions\StandardPermissions',
+
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -78,7 +120,7 @@ return [
         'backend' => [
             'web',
             'auth.admin',
-            //'permissions',
+            'permissions',
         ],
         'frontend' => [
             'web'
