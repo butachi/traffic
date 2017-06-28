@@ -2,18 +2,64 @@
 
 namespace Modules\Dashboard\Http\Controllers\Admin;
 
+use Artisaninweb\SoapWrapper\SoapWrapper;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\Dashboard\Soap\Request\GetConversionAmount;
+use Modules\Dashboard\Soap\Response\GetConversionAmountResponse;
+use Modules\System\Services\UsaepayClient;
 
 class DashboardController extends Controller
 {
+    /**
+     * @var SoapWrapper
+     */
+    protected $soapWrapper;
+
+    /**
+     * SoapController constructor.
+     *
+     * @param SoapWrapper $soapWrapper
+     */
+    public function __construct(SoapWrapper $soapWrapper)
+    {
+        $this->soapWrapper = $soapWrapper;
+    }
+
     /**
      * Display a listing of the resource.
      * @return Response
      */
     public function index()
     {
+        /*$sourcekey = 'P3S5245eIt0WWa4ECr5X8GaN1IBKsMZ6';
+        $sourcepin = '1234';
+        $sandbox = true;
+        $options = [
+            'debug' => true,
+        ];
+
+        $usaepay = new UsaepayClient($sourcekey, $sourcepin, $sandbox, $options);
+
+        $Request=array(
+            'AccountHolder' => 'Tester Jones',
+            'Details' => array(
+                'Description' => 'Example Transaction',
+                'Amount' => '4.00',
+                'Invoice' => '44539'
+            ),
+            'CreditCardData' => array(
+                'CardNumber' => '4444555566667779',
+                'CardExpiration' => '0919',
+                'AvsStreet' => '1234 Main Street',
+                'AvsZip' => '99281',
+                'CardCode' => '999'
+            )
+        );
+
+        $res = $usaepay->runCredit($Request);
+        dd($res);*/
         return view('dashboard::admin.dashboard');
     }
 

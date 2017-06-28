@@ -7,9 +7,12 @@
     "order": 0,
     "providers": [
         "Modules\\Dashboard\\Providers\\DashboardServiceProvider",
-        "Modules\\Dashboard\\Providers\\RouteServiceProvider"
+        "Modules\\Dashboard\\Providers\\RouteServiceProvider",
+        "Artisaninweb\\SoapWrapper\\ServiceProvider"
     ],
-    "aliases":{},
+    "aliases":{
+        "SoapWrapper": "Artisaninweb\\SoapWrapper\\Facade"
+    },
     "files": [
         "start.php"
     ]

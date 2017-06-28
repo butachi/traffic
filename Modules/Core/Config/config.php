@@ -120,7 +120,7 @@ return [
         'backend' => [
             'web',
             'auth.admin',
-            'permissions',
+            //'permissions',
         ],
         'frontend' => [
             'web'

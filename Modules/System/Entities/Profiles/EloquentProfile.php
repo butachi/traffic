@@ -40,7 +40,7 @@ class EloquentProfile extends Model implements ProfileInterface
 
     /**
      * The function get utility with profile id
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function utilities()

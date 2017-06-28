@@ -30,13 +30,6 @@ trait PermissionsTrait
     protected $permissions = [];
 
     /**
-     * The secondary permissions.
-     *
-     * @var array
-     */
-    protected $secondaryPermissions = [];
-
-    /**
      * An array of cached, prepared permissions.
      *
      * @var array
@@ -46,18 +39,13 @@ trait PermissionsTrait
     /**
      * Create a new permissions instance.
      *
-     * @param  array  $permissions
-     * @param  array  $secondaryPermissions
-     * @return void
+     * @param  array $permissions
+     * @return \Modules\Core\Auth\Permissions\PermissionsTrait
      */
-    public function __construct(array $permissions = null, array $secondaryPermissions = null)
+    public function __construct(array $permissions = null)
     {
         if (isset($permissions)) {
             $this->permissions = $permissions;
-        }
-
-        if (isset($secondaryPermissions)) {
-            $this->secondaryPermissions = $secondaryPermissions;
         }
     }
 
@@ -197,12 +185,11 @@ trait PermissionsTrait
      */
     protected function checkPermission(array $prepared, $permission)
     {
-        if (array_key_exists($permission, $prepared) && $prepared[$permission] === true) {
+        if (array_key_exists($permission, $prepared) && $prepared[$permission] === 0) {
             return true;
         }
-
         foreach ($prepared as $key => $value) {
-            if ((str_is($permission, $key) || str_is($key, $permission)) && $value === true) {
+            if ((str_is($permission, $key) || str_is($key, $permission)) && $value === 0) {
                 return true;
             }
         }

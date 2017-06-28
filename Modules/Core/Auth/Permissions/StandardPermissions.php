@@ -31,12 +31,6 @@ class StandardPermissions implements PermissionsInterface
     {
         $prepared = [];
 
-        if (! empty($this->secondaryPermissions)) {
-            foreach ($this->secondaryPermissions as $permissions) {
-                $this->preparePermissions($prepared, $permissions);
-            }
-        }
-
         if (! empty($this->permissions)) {
             $permissions = [];
 

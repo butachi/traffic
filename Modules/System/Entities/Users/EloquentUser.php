@@ -401,11 +401,11 @@ class EloquentUser extends Model implements RoleableInterface, PermissibleInterf
         $rolePermissions = [];
         foreach ($this->roles as $role) {
             foreach ($role->profiles as $profile) {
-                dd($profile->utilities);
+                foreach ($profile->utilities as $utility) {
+                    $rolePermissions[$utility->tab_slug . '.' . $utility->activity_slug] = $utility->permission;
+                }
             }
-            $rolePermissions[] = $role->profiles;
         }
-
         return new static::$permissionsClass($rolePermissions);
     }
 }
