@@ -2,29 +2,21 @@
 
 namespace Modules\Dashboard\Http\Controllers\Admin;
 
-use Artisaninweb\SoapWrapper\SoapWrapper;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Modules\Dashboard\Soap\Request\GetConversionAmount;
-use Modules\Dashboard\Soap\Response\GetConversionAmountResponse;
 use Modules\System\Services\UsaepayClient;
 
 class DashboardController extends Controller
 {
-    /**
-     * @var SoapWrapper
-     */
-    protected $soapWrapper;
 
     /**
      * SoapController constructor.
      *
-     * @param SoapWrapper $soapWrapper
      */
-    public function __construct(SoapWrapper $soapWrapper)
+    public function __construct()
     {
-        $this->soapWrapper = $soapWrapper;
+
     }
 
     /**

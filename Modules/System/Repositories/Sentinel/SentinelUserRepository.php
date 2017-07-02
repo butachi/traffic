@@ -64,8 +64,8 @@ class SentinelUserRepository implements UserRepository
         }
 
         if ($activated) {
-            $activation = Activation::create($user);
-            Activation::complete($user, $activation->code);
+            $user->status = 'Active';
+            $user->save();
         }
     }
 
