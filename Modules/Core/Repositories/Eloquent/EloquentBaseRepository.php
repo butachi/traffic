@@ -37,6 +37,15 @@ abstract class EloquentBaseRepository implements BaseRepository
     }
 
     /**
+     * @param $item
+     * @return mixed
+     */
+    public function paginate($item)
+    {
+        return $this->model->paginate($item);
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function all()
@@ -44,7 +53,6 @@ abstract class EloquentBaseRepository implements BaseRepository
         if (method_exists($this->model, 'translations')) {
             return $this->model->with('translations')->orderBy('created_at', 'DESC')->get();
         }
-
         return $this->model->orderBy('created_at', 'DESC')->get();
     }
 

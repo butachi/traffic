@@ -3,6 +3,7 @@
 return [
     'title' => [
         'system' => 'System',
+        'user management' => 'User Management',
     ],
     'breadcrumb' => [
         'home' => 'Home',

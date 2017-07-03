@@ -7,7 +7,7 @@ return [
     'title' => [
         'users' => 'Users',
         'new-user' => 'New user',
-        'edit-user' => 'Edit user',
+        'edit-user' => 'Edit user'
     ],
     'breadcrumb' => [
         'home' => 'Home',

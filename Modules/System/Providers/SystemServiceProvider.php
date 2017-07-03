@@ -3,6 +3,8 @@
 namespace Modules\System\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Modules\System\Entities\Profiles\EloquentProfile;
+use Modules\System\Repositories\Eloquent\EloquentProfileRepository;
 
 class SystemServiceProvider extends ServiceProvider
 {
@@ -103,6 +105,14 @@ class SystemServiceProvider extends ServiceProvider
             'Modules\Core\Contracts\Authentication',
             "Modules\\System\\Repositories\\{$driver}\\{$driver}Authentication"
         );
+
+        $this->app->bind(
+            'Modules\System\Repositories\ProfileRepository',
+            function () {
+                return new EloquentProfileRepository(new EloquentProfile());
+            }
+        );
+
     }
 
     private function registerMiddleware($router)

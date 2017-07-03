@@ -34,28 +34,20 @@ class SidebarExtender implements \Maatwebsite\Sidebar\SidebarExtender
                 $item->weight(0);
                 $item->icon('fa fa-cog fw');
                 $item->authorize(
-                    $this->auth->hasAccess('user.users.index') or $this->auth->hasAccess('user.roles.index')
+                    $this->auth->hasAccess('system.users.index') or $this->auth->hasAccess('system.role.index')
                 );
-                $item->item(trans('system::settings.title.settings'), function (Item $item) {
-                        $item->weight(0);
-                        $item->icon('');
-                        $item->route('admin.system.role.index');
-                        $item->authorize(
-                            $this->auth->hasAccess('user.roles.index')
-                        );
-                    });
-                $item->item(trans('system::users.title.users'), function (Item $item) {
+                $item->item(trans('system::system.title.user management'), function (Item $item) {
                     $item->weight(1);
                     $item->icon('');
                     $item->authorize(
-                        $this->auth->hasAccess('user.users.index')
+                        $this->auth->hasAccess('system.user.index')
                     );
                     $item->item(trans('system::users.title.users'), function (Item $item) {
                             $item->weight(1);
                             $item->icon('');
                             $item->route('admin.system.user.index');
                             $item->authorize(
-                                $this->auth->hasAccess('user.roles.index')
+                                $this->auth->hasAccess('system.user.index')
                             );
                         });
                     $item->item(trans('system::roles.title.roles'), function (Item $item) {
@@ -63,7 +55,15 @@ class SidebarExtender implements \Maatwebsite\Sidebar\SidebarExtender
                             $item->icon('');
                             $item->route('admin.system.role.index');
                             $item->authorize(
-                                $this->auth->hasAccess('user.roles.index')
+                                $this->auth->hasAccess('system.role.index')
+                            );
+                        });
+                    $item->item(trans('system::profiles.title.profiles'), function (Item $item) {
+                            $item->weight(1);
+                            $item->icon('');
+                            $item->route('admin.system.profile.index');
+                            $item->authorize(
+                                $this->auth->hasAccess('system.profile.index')
                             );
                         });
                 });
