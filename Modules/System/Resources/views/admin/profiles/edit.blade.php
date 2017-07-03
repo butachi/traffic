@@ -31,7 +31,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="grid-stack">
-            <form method="post" action="{{ route('admin.system.user.update', $user->id) }}" name="EditView" enctype="multipart/form-data">
+            <form method="post" action="{{ route('admin.system.profile.update', $profile->profile_id) }}" name="EditView" enctype="multipart/form-data">
                 <input type="hidden" name="">
                 <div>
                     <table class="table table-bordered marginLeftZero">

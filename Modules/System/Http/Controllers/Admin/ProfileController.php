@@ -1,5 +1,6 @@
 <?php namespace Modules\System\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Request;
 use Modules\Core\Permissions\PermissionManager;
 use Modules\System\Http\Requests\RolesRequest;
 use Modules\System\Repositories\ProfileRepository;
@@ -47,7 +48,7 @@ class ProfileController
      * @param  RolesRequest $request
      * @return Response
      */
-    public function store(RolesRequest $request)
+    public function store(Request $request)
     {
         $data = $this->mergeRequestWithPermissions($request);
 
@@ -82,9 +83,10 @@ class ProfileController
      * @param  RolesRequest $request
      * @return Response
      */
-    public function update($id, RolesRequest $request)
+    public function update($id, Request $request)
     {
-        $data = $this->mergeRequestWithPermissions($request);
+        $data = $request->all();
+
 
         $this->role->update($id, $data);
 

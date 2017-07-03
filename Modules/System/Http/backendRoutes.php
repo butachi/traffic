@@ -15,4 +15,5 @@ $router->group(['prefix' => '/users'], function ($router) {
         $router->get('/profile', 'ProfileController@index')->name('admin.system.profile.index');
         $router->get('/profile/create', 'ProfileController@create')->name('admin.system.profile.create');
         $router->get('/profile/{id}/edit', 'ProfileController@edit')->name('admin.system.profile.edit');
+        $router->put('/profile/{id}/edit', 'ProfileController@update')->name('admin.system.profile.update');
     });
