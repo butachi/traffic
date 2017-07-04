@@ -1,19 +1,19 @@
 <?php
 //user management
-$router->group(['prefix' => '/users'], function ($router) {
+$router->group(['prefix' => '/user-management'], function ($router) {
         //manager users
-        $router->get('/', 'UserController@index')->name('admin.system.user.index');
-        $router->get('/create', 'UserController@create')->name('admin.system.user.create');
-        $router->post('/create', 'UserController@store')->name('admin.system.user.store');
-        $router->get('/{users}/edit', 'UserController@edit')->name('admin.system.user.edit');
-        $router->post('/{users}/edit', 'UserController@update')->name('admin.system.user.update');
+        $router->get('users/', 'UserController@index')->name('admin.system.user.index');
+        $router->get('users/create', 'UserController@create')->name('admin.system.user.create');
+        $router->post('users/create', 'UserController@store')->name('admin.system.user.store');
+        $router->get('users/{users}/edit', 'UserController@edit')->name('admin.system.user.edit');
+        $router->post('users/{users}/edit', 'UserController@update')->name('admin.system.user.update');
 
         //manager roles
-        $router->get('/role', ['use' => 'RoleController@role', 'as' => 'admin.system.role.index']);
+        $router->get('/roles', 'RoleController@index')->name('admin.system.role.index');
 
         //manager profile
-        $router->get('/profile', 'ProfileController@index')->name('admin.system.profile.index');
-        $router->get('/profile/create', 'ProfileController@create')->name('admin.system.profile.create');
-        $router->get('/profile/{id}/edit', 'ProfileController@edit')->name('admin.system.profile.edit');
-        $router->put('/profile/{id}/edit', 'ProfileController@update')->name('admin.system.profile.update');
+        $router->get('/profiles', 'ProfileController@index')->name('admin.system.profile.index');
+        $router->get('/profiles/create', 'ProfileController@create')->name('admin.system.profile.create');
+        $router->get('/profiles/{id}/edit', 'ProfileController@edit')->name('admin.system.profile.edit');
+        $router->put('/profiles/{id}/edit', 'ProfileController@update')->name('admin.system.profile.update');
     });

@@ -7,7 +7,7 @@
         <button type="submit" form="form-product" formaction="http://opencart.dev/admin/index.php?route=catalog/product/copy&amp;token=JnDJfZ6r0kigtKrYek7213qHYu8ERLXn" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Copy"><i class="fa fa-copy"></i></button>
         <button type="button" data-toggle="tooltip" title="" class="btn btn-danger" onclick="confirm('Are you sure?') ? $('#form-product').submit() : false;" data-original-title="Delete"><i class="fa fa-trash-o"></i></button>
     </div>
-    <h1>{{ trans('system::users.title.users') }}</h1>
+    <h1>{{ trans('system::system.title.user management') }}</h1>
     <ul class="breadcrumb">
         <li><a href="">Home</a></li>
         <li><a href="{{ route('admin.system.profile.index') }}">Profile</a></li>

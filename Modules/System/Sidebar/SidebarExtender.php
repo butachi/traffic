@@ -51,7 +51,7 @@ class SidebarExtender implements \Maatwebsite\Sidebar\SidebarExtender
                             );
                         });
                     $item->item(trans('system::roles.title.roles'), function (Item $item) {
-                            $item->weight(1);
+                            $item->weight(2);
                             $item->icon('');
                             $item->route('admin.system.role.index');
                             $item->authorize(
@@ -59,7 +59,7 @@ class SidebarExtender implements \Maatwebsite\Sidebar\SidebarExtender
                             );
                         });
                     $item->item(trans('system::profiles.title.profiles'), function (Item $item) {
-                            $item->weight(1);
+                            $item->weight(3);
                             $item->icon('');
                             $item->route('admin.system.profile.index');
                             $item->authorize(

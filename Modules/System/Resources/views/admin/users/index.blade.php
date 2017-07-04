@@ -99,7 +99,7 @@
 </div>
 <div class="row">
     <div class="col-sm-6 text-left">{{ $users->links() }}</div>
-    <div class="col-sm-6 text-right">test2</div>
+    <div class="col-sm-6 text-right"></div>
 </div>
 @stop
 

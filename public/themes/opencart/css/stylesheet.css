@@ -656,6 +656,15 @@ input[type="checkbox"]:checked::after, .checkbox input[type="checkbox"]:checked:
 	font-size: 10.5em;
 }
 /*--------------------------------------------------------------------------------------------------------------------*/
+.btn {
+    border-radius: 0px;
+    font-weight: 100;
+    cursor: pointer;
+}
+.btn:hover {
+    cursor: pointer;
+}
+
 /*label field*/
 .fieldLabel {
     width: 20%;
@@ -693,3 +702,52 @@ td.fieldValue .input-append {
 .has-error {
     border-color: #f56b6b;
 }
+.treeView li {
+    border-left: 4px solid #dddddd;
+    list-style: none;
+    padding-top: 15px;
+}
+.treeView li .toolbar-handle {
+    margin-top: 10px;
+    margin-left: 10px;
+    position: relative;
+}
+.treeView li .toolbar-handle .btn {
+    margin: 0px;
+}
+.treeView li .toolbar-handle a:before {
+    background: none repeat scroll 0 0 #DDDDDD;
+    content: " ";
+    display: inline-block;
+    height: 4px;
+    left: -10px;
+    position: absolute;
+    top: 12px;
+    width: 10px;
+}
+.treeView ul {
+    margin-top: -16px;
+}
+.app-SALES {
+    background: #3CB878 !important;
+}
+.app-MARKETING {
+    background: #EF5E29 !important;
+}
+.app-OTHER {
+    background: #56ccc8 !important;
+}
+.app-SUPPORT {
+    background: #6297C3 !important;
+}
+.app-INVENTORY {
+    background: #F1C40F !important;
+}
+.app-PROJECT {
+    background: #8E44AD !important;
+}
+.app-DEFAULT,
+.app-DASHBOARD {
+    background: #56ccc8 !important;
+}
+

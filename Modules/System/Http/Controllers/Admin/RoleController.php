@@ -1,10 +1,10 @@
-<?php namespace Modules\User\Http\Controllers\Admin;
+<?php namespace Modules\System\Http\Controllers\Admin;
 
 use Modules\Core\Permissions\PermissionManager;
-use Modules\User\Http\Requests\RolesRequest;
-use Modules\User\Repositories\RoleRepository;
+use Modules\System\Http\Requests\RolesRequest;
+use Modules\System\Repositories\RoleRepository;
 
-class RolesController extends BaseUserModuleController
+class RoleController extends BaseUserModuleController
 {
     /**
      * @var RoleRepository
@@ -28,7 +28,7 @@ class RolesController extends BaseUserModuleController
     {
         $roles = $this->role->all();
 
-        return view('user::admin.roles.index', compact('roles'));
+        return view('system::admin.roles.index', compact('roles'));
     }
 
     /**
