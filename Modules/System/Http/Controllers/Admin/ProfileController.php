@@ -39,7 +39,7 @@ class ProfileController
      */
     public function create()
     {
-        return view('user::admin.roles.create');
+        return view('user::admin.profiles.create');
     }
 
     /**
@@ -72,6 +72,8 @@ class ProfileController
 
             return redirect()->route('admin.system.profile.index');
         }
+
+        
 
         return view('system::admin.profiles.edit', compact('profile'));
     }

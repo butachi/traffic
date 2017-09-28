@@ -32,7 +32,7 @@ class CatalogServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->registerBindings();
     }
 
     /**
@@ -85,6 +85,23 @@ class CatalogServiceProvider extends ServiceProvider
             $this->loadTranslationsFrom(__DIR__ .'/../Resources/lang', 'catalog');
         }
     }
+
+    public function registerBindings()
+    {
+        $this->app->bind(
+            'Modules\Catalog\Repositories\CategoryRepository',
+            function () {
+                $repository = new EloquentCategoryRepository(new Menu());
+
+                if (! config('app.cache')) {
+                    return $repository;
+                }
+
+                return new CacheMenuDecorator($repository);
+            }
+        );
+    }
+
 
     /**
      * Get the services provided by the provider.

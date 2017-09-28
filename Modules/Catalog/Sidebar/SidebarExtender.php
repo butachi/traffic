@@ -5,7 +5,7 @@ use Maatwebsite\Sidebar\Item;
 use Maatwebsite\Sidebar\Menu;
 use Modules\Core\Contracts\Authentication;
 
-class SidebarExtender1 implements \Maatwebsite\Sidebar\SidebarExtender
+class SidebarExtender implements \Maatwebsite\Sidebar\SidebarExtender
 {
     /**
      * @var Authentication
@@ -30,36 +30,33 @@ class SidebarExtender1 implements \Maatwebsite\Sidebar\SidebarExtender
     public function extendWith(Menu $menu)
     {
         $menu->group(trans('catalog::workshop.title'), function (Group $group) {
-            $group->item(trans('catalog::users.title.users'), function (Item $item) {
+            $group->item(trans('catalog::catalog.title'), function (Item $item) {
                 $item->weight(0);
                 $item->icon('fa fa-tags fw');
                 $item->authorize(
-                    $this->auth->hasAccess('catalog.users.index')
-                    or $this->auth->hasAccess('catalog.roles.index')
+                    $this->auth->hasAccess('catalog.category.index')
+                    or $this->auth->hasAccess('catalog.product.index')
                 );
-
-                $item->item(trans('catalog::users.title.users'), function (Item $item) {
+                $item->item(trans('catalog::category.title.categories'), function (Item $item) {
                     $item->weight(0);
-                    $item->icon('fa fa-user');
-                    $item->route('admin.catalog.user.index');
+                    $item->icon('');
+                    $item->route('admin.catalog.category.index');
                     $item->authorize(
-                        $this->auth->hasAccess('user.users.index')
+                        $this->auth->hasAccess('catalog.category.index')
                     );
                 });
 
-                $item->item(trans('catalog::roles.title.roles'), function (Item $item) {
+                $item->item(trans('catalog::product.title.products'), function (Item $item) {
                     $item->weight(1);
-                    $item->icon('fa fa-flag-o');
-                    $item->route('admin.catalog.role.index');
+                    $item->icon('');
+                    $item->route('admin.catalog.product.index');
                     $item->authorize(
-                        $this->auth->hasAccess('catalog.roles.index')
+                        $this->auth->hasAccess('catalog.product.index')
                     );
                 });
             });
 
         });
-
         return $menu;
-
     }
 }

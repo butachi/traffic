@@ -4,9 +4,10 @@
     "description": "",
     "keywords": [],
     "active": 1,
-    "order": 0,
+    "order": 2,
     "providers": [
-        "Modules\\Catalog\\Providers\\CatalogServiceProvider"
+        "Modules\\Catalog\\Providers\\CatalogServiceProvider",
+        "Modules\\Catalog\\Providers\\RouteServiceProvider"
     ],
     "aliases":{},
     "files": [

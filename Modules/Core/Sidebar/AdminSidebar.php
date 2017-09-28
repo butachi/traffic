@@ -42,7 +42,7 @@ class AdminSidebar implements Sidebar, ShouldCache
      */
     public function build()
     {
-        foreach ($this->modules->enabled() as $module) {
+        foreach ($this->modules->getOrdered() as $module) {
             $name = studly_case($module->getName());
             $class = 'Modules\\' . $name . '\\Sidebar\\SidebarExtender';
 
