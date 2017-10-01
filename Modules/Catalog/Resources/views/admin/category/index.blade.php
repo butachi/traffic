@@ -4,8 +4,6 @@
 <div class="pull-right">
     <a href="{{ route('admin.system.user.create') }}" data-toggle="tooltip" title=""
        class="btn btn-primary" data-original-title="Add New"><i class="fa fa-plus"></i></a>
-    <button type="submit" form="form-product" formaction="http://opencart.dev/admin/index.php?route=catalog/product/copy&amp;token=JnDJfZ6r0kigtKrYek7213qHYu8ERLXn" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Copy"><i class="fa fa-copy"></i></button>
-    <button type="button" data-toggle="tooltip" title="" class="btn btn-danger" onclick="confirm('Are you sure?') ? $('#form-product').submit() : false;" data-original-title="Delete"><i class="fa fa-trash-o"></i></button>
 </div>
 <h1>{{ trans('system::system.title.user management') }}</h1>
 <ul class="breadcrumb">
@@ -16,93 +14,105 @@
 @stop
 
 @section('styles')
-<style>
-    .grid-stack-item {
-        padding-right: 20px !important;s
-    }
-</style>
+<link href="{{ Theme::url('js/jquery/nestable/nestable.css') }}" rel="stylesheet" media="screen" />
 @stop
 
 @section('content')
 <div class="row">
     <div class="col-md-12">
-        <div class="grid-stack">
-            <div class="listViewEntriesDiv" style="overflow-x:auto;">
-                <input type="hidden" value="" id="orderBy">
-                <input type="hidden" value="" id="sortOrder">
-                <span class="listViewLoadingImageBlock hide modal" id="loadingListViewModal">
-                    <img class="listViewLoadingImage" src="layouts/vlayout/skins/nature/images/loading.gif" alt="no-image" title="Loading">
-                    <p class="listViewLoadingMsg">Loading, Please wait.........</p>
-                </span>
-                <table class="table table-bordered listViewEntriesTable">
-                    <thead><tr class="listViewHeaders">
-                        <th style="width: 1px;">
-                            <input type="checkbox">
-                        </th>
-                        <th nowrap="" style="width: 150px;">
-                            <a href="javascript:void(0);"
-                               class="listViewHeaderValues" data-nextsortorderval="ASC" data-columnname="first_name">Action&nbsp;&nbsp;</a>
-                        </th>
-                        <th nowrap="">
-                            <a href="javascript:void(0);" class="listViewHeaderValues"
-                               data-nextsortorderval="ASC" data-columnname="roleid">Name&nbsp;&nbsp;</a></th>
-                        <th nowrap="">
-                            <a href="javascript:void(0);" class="listViewHeaderValues"
-                               data-nextsortorderval="ASC" data-columnname="user_name">Description&nbsp;&nbsp;</a>
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php if (isset($profiles)): ?>
-                        <?php foreach ($profiles as $profile): ?>
-                            <tr class="listViewEntries" data-id="1">
-                                <td><input type="checkbox"></td>
-                                <td class="medium" nowrap="">
-                                    <div class="pull-right actions">
-                                        <span class="actionImages">
-                                            <a id="Users_LISTVIEW_ROW_1_EDIT" class="btn btn-info"
-                                               href="{{ route('admin.system.profile.edit', $profile->profile_id) }}">
-                                                <i title="Edit" class="fa fa-pencil alignMiddle"></i></a>&nbsp;</span>
-                                    </div>
-                                    <div class="pull-right actions">
-                                        <span class="actionImages">
-                                            <a id="Users_LISTVIEW_ROW_1_EDIT" class="btn btn-danger"
-                                               href="{{ route('admin.system.profile.edit', $profile->profile_id) }}">
-                                                <i title="Edit" class="fa fa-trash-o"></i></a>&nbsp;</span>
-                                    </div>
-                                    <div class="pull-right actions">
-                                        <span class="actionImages">
-                                            <a id="Users_LISTVIEW_ROW_1_EDIT" class="btn btn-default"
-                                               href="{{ route('admin.system.profile.edit', $profile->profile_id) }}">
-                                                <i title="Edit" class="fa fa-copy"></i></a>&nbsp;</span>
-                                    </div>
-                                </td>
-                                <td class="listViewEntryValue medium"><div class="row-fluid">
-                                        <div class="span6">
-                                            <div>
-                                                <a href="{{ route('admin.system.profile.edit', $profile->profile_id) }}">{{ $profile->profile_name }}</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="medium" nowrap="">
-                                    {{ $profile->description }}
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                    </tbody>
-                </table>
-            </div>
+        <div class="dd">
+            <ol class="dd-list">
+                <li class="dd-item" data-id="1">
+                    <div class="btn-group" role="group" style="display: inline" aria-label="Action buttons">
+                        <a class="btn btn-sm btn-danger jsDeleteMenuItem" style="float:left;" data-item-id="3">
+                            <i class="fa fa-times"></i>
+                        </a>
+                        <a class="btn btn-sm btn-info" style="float:left; margin-right: 15px;" href="http://hungnt.cmslaravel.dev/en/backend/menu/menus/2/menuitem/3/edit">
+                            <i class="fa fa-pencil"></i>
+                        </a>
+                    </div>
+                    <div class="dd-handle">Item 1</div>
+                </li>
+                <li class="dd-item" data-id="2">
+                    <div class="btn-group" role="group" style="display: inline" aria-label="Action buttons">
+                        <a class="btn btn-sm btn-danger jsDeleteMenuItem" style="float:left;" data-item-id="3">
+                            <i class="fa fa-times"></i>
+                        </a>
+                        <a class="btn btn-sm btn-info" style="float:left; margin-right: 15px;" href="http://hungnt.cmslaravel.dev/en/backend/menu/menus/2/menuitem/3/edit">
+                            <i class="fa fa-pencil"></i>
+                        </a>
+                    </div>
+                    <div class="dd-handle">Item 2</div>
+                    <ol class="dd-list">
+                        <li class="dd-item" data-id="4">
+                            <div class="btn-group" role="group" style="display: inline" aria-label="Action buttons">
+                                <a class="btn btn-sm btn-danger jsDeleteMenuItem" style="float:left;" data-item-id="3">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                                <a class="btn btn-sm btn-info" style="float:left; margin-right: 15px;" href="http://hungnt.cmslaravel.dev/en/backend/menu/menus/2/menuitem/3/edit">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                            </div>
+                            <div class="dd-handle">Item 4</div>
+                        </li>
+                        <li class="dd-item" data-id="5">
+                            <div class="btn-group" role="group" style="display: inline" aria-label="Action buttons">
+                                <a class="btn btn-sm btn-danger jsDeleteMenuItem" style="float:left;" data-item-id="3">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                                <a class="btn btn-sm btn-info" style="float:left; margin-right: 15px;" href="http://hungnt.cmslaravel.dev/en/backend/menu/menus/2/menuitem/3/edit">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                            </div>
+                            <div class="dd-handle">Item 5</div>
+                        </li>
+                    </ol>
+                </li>
+                <li class="dd-item" data-id="3">
+                    <div class="btn-group" role="group" style="display: inline" aria-label="Action buttons">
+                        <a class="btn btn-sm btn-danger jsDeleteMenuItem" style="float:left;" data-item-id="3">
+                            <i class="fa fa-times"></i>
+                        </a>
+                        <a class="btn btn-sm btn-info" style="float:left; margin-right: 15px;" href="http://hungnt.cmslaravel.dev/en/backend/menu/menus/2/menuitem/3/edit">
+                            <i class="fa fa-pencil"></i>
+                        </a>
+                    </div>
+                    <div class="dd-handle">Item 3</div>
+                    <ol class="dd-list">
+                        <li class="dd-item" data-id="4">
+                            <div class="btn-group" role="group" style="display: inline" aria-label="Action buttons">
+                                <a class="btn btn-sm btn-danger jsDeleteMenuItem" style="float:left;" data-item-id="3">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                                <a class="btn btn-sm btn-info" style="float:left; margin-right: 15px;" href="http://hungnt.cmslaravel.dev/en/backend/menu/menus/2/menuitem/3/edit">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                            </div>
+                            <div class="dd-handle">Item 4</div>
+                        </li>
+                        <li class="dd-item" data-id="5">
+                            <div class="btn-group" role="group" style="display: inline" aria-label="Action buttons">
+                                <a class="btn btn-sm btn-danger jsDeleteMenuItem" style="float:left;" data-item-id="3">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                                <a class="btn btn-sm btn-info" style="float:left; margin-right: 15px;" href="http://hungnt.cmslaravel.dev/en/backend/menu/menus/2/menuitem/3/edit">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                            </div>
+                            <div class="dd-handle">Item 5</div>
+                        </li>
+                    </ol>
+                </li>
+            </ol>
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-sm-6 text-left">{{ $profiles->links() }}</div>
-    <div class="col-sm-6 text-right"></div>
-</div>
-@stop
 
+@stop
 @section('scripts')
+{!! Theme::script('js/jquery/nestable/jquery.nestable.js') !!}
+<script type="text/javascript">
+    $('.dd').nestable({ /* config options */ });
+</script>
 @parent
 @stop
