@@ -1,5 +1,7 @@
 <?php namespace Modules\Catalog\Entities;
 
-class Category {
+use Illuminate\Database\Eloquent\Model;
+
+class Category extends Model{
 
 } 
