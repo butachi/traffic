@@ -91,7 +91,7 @@ class CatalogServiceProvider extends ServiceProvider
         $this->app->bind(
             'Modules\Catalog\Repositories\CategoryRepository',
             function () {
-                $repository = new EloquentCategoryRepository(new Menu());
+                $repository = new EloquentCategoryRepository(new Category());
 
                 if (! config('app.cache')) {
                     return $repository;

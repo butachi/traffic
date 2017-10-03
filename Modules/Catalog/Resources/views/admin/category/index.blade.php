@@ -5,10 +5,10 @@
     <a href="{{ route('admin.system.user.create') }}" data-toggle="tooltip" title=""
        class="btn btn-primary" data-original-title="Add New"><i class="fa fa-plus"></i></a>
 </div>
-<h1>{{ trans('system::system.title.user management') }}</h1>
+<h1>{{ trans('catalog::category.title.catalog') }}</h1>
 <ul class="breadcrumb">
     <li><a href="">Home</a></li>
-    <li><a href="{{ route('admin.system.profile.index') }}">Profile</a></li>
+    <li><a href="{{ route('admin.system.profile.index') }}">Category</a></li>
 </ul>
 
 @stop
@@ -19,7 +19,7 @@
 
 @section('content')
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6">
         <div class="dd">
             <ol class="dd-list">
                 <li class="dd-item" data-id="1">
@@ -104,6 +104,42 @@
                     </ol>
                 </li>
             </ol>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-filter"></i> Filter</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="control-label" for="input-name">Product Name</label>
+                    <input type="text" name="filter_name" value="" placeholder="Product Name" id="input-name" class="form-control" autocomplete="off"><ul class="dropdown-menu"></ul>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="input-model">Model</label>
+                    <input type="text" name="filter_model" value="" placeholder="Model" id="input-model" class="form-control" autocomplete="off"><ul class="dropdown-menu"></ul>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="input-price">Price</label>
+                    <input type="text" name="filter_price" value="" placeholder="Price" id="input-price" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="input-quantity">Quantity</label>
+                    <input type="text" name="filter_quantity" value="" placeholder="Quantity" id="input-quantity" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="input-status">Status</label>
+                    <select name="filter_status" id="input-status" class="form-control">
+                        <option value=""></option>
+                        <option value="1">Enabled</option>
+                        <option value="0">Disabled</option>
+                    </select>
+                </div>
+                <div class="form-group text-right">
+                    <button type="button" id="button-filter" class="btn btn-default"><i class=""></i> Update</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -8,6 +8,12 @@ use Illuminate\Routing\Controller;
 
 class CatalogController extends Controller
 {
+    private $category;
+
+    public function __construct()
+    {
+        
+    }
     /**
      * Display a listing of the resource.
      * @return Response
