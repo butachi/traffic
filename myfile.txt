@@ -1,2 +1,1 @@
 add: dang ky thay doi trong index
-commit: luu lai trang thai cua index
