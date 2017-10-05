@@ -26,7 +26,6 @@ class AuthorisedApiToken
 
     public function handle(Request $request, \Closure $next)
     {
-        dd($request->header('Authorization'));
         if ($request->header('Authorization') === null) {
             return new Response('Forbidden', 403);
         }
