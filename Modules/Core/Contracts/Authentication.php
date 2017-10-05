@@ -27,8 +27,8 @@ interface Authentication
 
     /**
      * Assign a role to the given user.
-     * @param  \Modules\User\Repositories\UserRepository $user
-     * @param  \Modules\User\Repositories\RoleRepository $role
+     * @param  \Modules\System\Repositories\UserRepository $user
+     * @param  \Modules\System\Repositories\RoleRepository $role
      * @return mixed
      */
     public function assignRole($user, $role);
@@ -74,6 +74,12 @@ interface Authentication
      * @return mixed
      */
     public function check();
+
+    /**
+     * Get the currently logged in user
+     * @return \Modules\System\Entities\Users\UserInterface
+     */
+    public function user();
 
     /**
      * Get the ID for the currently authenticated user

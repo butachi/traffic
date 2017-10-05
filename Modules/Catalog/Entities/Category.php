@@ -2,18 +2,20 @@
 
 use Dimsav\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
+use TypiCMS\NestableTrait;
 
 class Category extends Model {
-    use Translatable;
+    use Translatable, NestableTrait;
 
     protected $fillable = [
-
+        'icon_image',
+        'parent_id',
+        'sort_order',
+        'status'
     ];
 
-
-    public $translatedAttributes = ['title', 'status'];
+    public $translatedAttributes = ['title', 'description'];
     protected $table = 'tbl_category';
+    protected $primaryKey = 'id';
 
-    public $translatedAttributes = ['title', 'status'];
-    protected $table = 'tbl_category';
 } 

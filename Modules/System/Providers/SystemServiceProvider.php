@@ -4,7 +4,15 @@ namespace Modules\System\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Modules\System\Entities\Profiles\EloquentProfile;
+use Modules\System\Entities\Users\UserToken;
+use Modules\System\Http\Middleware\AuthorisedApiToken;
+use Modules\System\Http\Middleware\AuthorisedApiTokenAdmin;
+use Modules\System\Http\Middleware\GuestMiddleware;
+use Modules\System\Http\Middleware\TokenCan;
 use Modules\System\Repositories\Eloquent\EloquentProfileRepository;
+use Modules\System\Repositories\Eloquent\EloquentUserTokenRepository;
+use Modules\System\Repositories\UserTokenRepository;
+use Modules\User\Http\Middleware\LoggedInMiddleware;
 
 class SystemServiceProvider extends ServiceProvider
 {
@@ -26,10 +34,11 @@ class SystemServiceProvider extends ServiceProvider
      * @var array
      */
     protected $middleware = [
-        'System' => [
-            'auth.guest' => 'GuestMiddleware',
-            'logged.in' => 'LoggedInMiddleware'
-        ],
+        'auth.guest' => GuestMiddleware::class,
+        'logged.in' => LoggedInMiddleware::class,
+        'api.token' => AuthorisedApiToken::class,
+        'api.token.admin' => AuthorisedApiTokenAdmin::class,
+        'token-can' => TokenCan::class
     ];
 
     /**
@@ -39,7 +48,7 @@ class SystemServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->registerMiddleware($this->app['router']);
+        $this->registerMiddleware();
         $this->registerViews();
     }
 
@@ -113,16 +122,21 @@ class SystemServiceProvider extends ServiceProvider
             }
         );
 
+        $this->app->bind(UserTokenRepository::class, function () {
+                $repository = new EloquentUserTokenRepository(new UserToken());
+
+                if (! config('app.cache')) {
+                    return $repository;
+                }
+
+                return new CacheUserTokenDecorator($repository);
+            });
     }
 
-    private function registerMiddleware($router)
+    private function registerMiddleware()
     {
-        foreach ($this->middleware as $module => $middlewares) {
-            foreach ($middlewares as $name => $middleware) {
-                $class = "Modules\\{$module}\\Http\\Middleware\\{$middleware}";
-
-                $router->middleware($name, $class);
-            }
+        foreach ($this->middleware as $name => $class) {
+            $this->app['router']->aliasMiddleware($name, $class);
         }
     }
 

@@ -2,7 +2,7 @@
 
 use Modules\Core\Auth\Checkpoints\NotActivatedException;
 use Modules\Core\Auth\Checkpoints\ThrottlingException;
-use Modules\Core\Contracts\Authentication as Authentication;
+use Modules\Core\Contracts\Authentication;
 use Modules\Core\Facades\User;
 use Modules\User\Events\UserHasActivatedAccount;
 
@@ -132,6 +132,21 @@ class SentinelAuthentication implements Authentication
      * @return mixed
      */
     public function check()
+    {
+        $user = User::check();
+
+        if ($user) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Get the currently logged in user
+     * @return \Modules\System\Entities\Users\UserInterface
+     */
+    public function user()
     {
         return User::check();
     }

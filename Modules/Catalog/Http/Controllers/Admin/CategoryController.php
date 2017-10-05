@@ -5,14 +5,15 @@ namespace Modules\Catalog\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\Catalog\Repositories\CategoryRepository;
 
 class CategoryController extends Controller
 {
     private $category;
     
-    public function __construct()
+    public function __construct(CategoryRepository $category)
     {
-        
+        $this->category = $category;
     }
     /**
      * Display a listing of the resource.
@@ -20,51 +21,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        
-        return view('catalog::admin.category.index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
-    public function create()
-    {
-        return view('catalog::create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     * @param  Request $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @return Response
-     */
-    public function edit()
-    {
-        return view('catalog::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param  Request $request
-     * @return Response
-     */
-    public function update(Request $request)
-    {
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @return Response
-     */
-    public function destroy()
-    {
+        $categories = $this->category->getTreeForCategory();
+        return view('catalog::admin.category.index', compact(
+                'categories'
+            ));
     }
 }

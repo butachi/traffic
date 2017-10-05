@@ -79,7 +79,7 @@ class Authentication {
     /**
      * Create a new Sentinel instance.
      *
-     * @param Persistences\PersistenceRepositoryInterface $persistences
+     * @param \Modules\Core\Auth\Persistences\PersistenceRepositoryInterface $persistences
      * @param \Modules\System\Entities\Users\UserRepositoryInterface $users
      * @param \Modules\System\Entities\Roles\RoleRepositoryInterface $roles
      * @param \Illuminate\Events\Dispatcher $dispatcher

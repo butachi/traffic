@@ -1,10 +1,10 @@
 {
-    "name": "nwidart/catalog",
-    "description": "",
+    "name": "hungnt/catalog",
+    "description": "Catalog module for project",
     "authors": [
         {
-            "name": "Nicolas Widart",
-            "email": "n.widart@gmail.com"
+            "name": "hungnt",
+            "email": "butachi.fo@gmail.com"
         }
     ],
     "autoload": {

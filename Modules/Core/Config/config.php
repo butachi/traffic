@@ -76,8 +76,24 @@ return [
     */
 
     'permissions' => [
-
         'class' => 'Modules\Core\Auth\Permissions\StandardPermissions',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Persistences
+    |--------------------------------------------------------------------------
+    |
+    | Here you may specify the persistences model used and weather to use the
+    | single persistence mode.
+    |
+    */
+
+    'persistences' => [
+
+        'model' => 'Modules\Core\Auth\Persistences\EloquentPersistence',
+
+        'single' => false,
 
     ],
 

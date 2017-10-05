@@ -355,6 +355,28 @@ class EloquentUser extends Model implements RoleableInterface, PermissibleInterf
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function api_keys()
+    {
+        return $this->hasMany(UserToken::class);
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function getFirstApiKey()
+    {
+        $userToken = $this->api_keys->first();
+
+        if ($userToken === null) {
+            return '';
+        }
+
+        return $userToken->access_token;
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function delete()

@@ -31,6 +31,6 @@ class RouteServiceProvider extends CoreRouteServiceProvider {
      */
     protected function getApiRoute()
     {
-        return false;
+        return __DIR__ . '/../Http/apiRoutes.php';
     }
 } 
