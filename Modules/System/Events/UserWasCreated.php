@@ -1,6 +1,8 @@
-<?php namespace Modules\System\Events;
+<?php
 
-class UserWasUpdated
+namespace Modules\System\Events;
+
+class UserWasCreated
 {
     public $user;
 

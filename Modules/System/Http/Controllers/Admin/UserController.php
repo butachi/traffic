@@ -84,7 +84,7 @@ class UserController extends BaseUserModuleController
 
         flash(trans('user::messages.user created'));
 
-        return redirect()->route('admin.user.user.index');
+        return redirect()->route('admin.system.user.index');
     }
 
     /**

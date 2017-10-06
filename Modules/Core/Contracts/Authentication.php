@@ -1,5 +1,7 @@
 <?php namespace Modules\Core\Contracts;
 
+use Modules\System\Entities\Users\UserInterface;
+
 interface Authentication
 {
     /**
@@ -86,4 +88,11 @@ interface Authentication
      * @return int
      */
     public function id();
+
+    /**
+     * Log a user manually in
+     * @param UserInterface $user
+     * @return UserInterface
+     */
+    public function logUserIn(UserInterface $user) : UserInterface;
 }

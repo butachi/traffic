@@ -40,7 +40,7 @@ class AuthorisedApiToken
     private function isValidToken($token)
     {
         $found = $this->userToken->findByAttributes(['access_token' => $this->parseToken($token)]);
-
+        dd($found);
         $this->auth->logUserIn($found->user);
 
         if ($found === null) {

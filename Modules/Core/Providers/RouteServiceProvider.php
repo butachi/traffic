@@ -50,7 +50,9 @@ abstract class RouteServiceProvider extends ServiceProvider {
                 $this->loadApiRoutes($router);
             });
 
-        $router->group(['namespace' => $this->namespace, 'prefix' => LaravelLocalization::setLocale(), 'middleware' => ['localizationRedirect'] ], function (Router $router) {
+        $router->group(['namespace' => $this->namespace, 'prefix' => LaravelLocalization::setLocale(),
+                'middleware' => ['localizationRedirect'] ],
+            function (Router $router) {
                 $this->loadBackendRoutes($router);
                 $this->loadFrontendRoutes($router);
             });
@@ -64,7 +66,10 @@ abstract class RouteServiceProvider extends ServiceProvider {
         $frontend = $this->getFrontendRoute();
 
         if ($frontend && file_exists($frontend)) {
-            $router->group(['middleware' => config('core.middleware.frontend', [])], function (Router $router) use ($frontend) {
+            $router->group([
+                    'middleware' => config('beputi.core.config.middleware.frontend',[])
+                ],
+                function (Router $router) use ($frontend) {
                     require $frontend;
                 });
         }
@@ -80,8 +85,8 @@ abstract class RouteServiceProvider extends ServiceProvider {
         if ($backend && file_exists($backend)) {
             $router->group([
                     'namespace' => 'Admin',
-                    'prefix' => config('core.admin-prefix'),
-                    'middleware' => config('core.middleware.backend', [])
+                    'prefix' => config('beputi.core.config.admin-prefix'),
+                    'middleware' => config('beputi.core.config.middleware.backend', [])
                 ], function (Router $router) use ($backend) {
                     require $backend;
                 });
@@ -96,7 +101,11 @@ abstract class RouteServiceProvider extends ServiceProvider {
         $api = $this->getApiRoute();
 
         if ($api && file_exists($api)) {
-            $router->group(['namespace' => 'Api', 'prefix' => 'api', 'middleware' => config('asgard.core.core.middleware.api', [])], function (Router $router) use ($api) {
+            $router->group([
+                    'namespace' => 'Api',
+                    'prefix' => 'api',
+                    'middleware' => config('beputi.core.config.middleware.api', [])],
+                function (Router $router) use ($api) {
                     require $api;
                 });
         }

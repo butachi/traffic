@@ -2,14 +2,14 @@
 
 namespace Modules\Core\Providers;
 
-use Illuminate\Contracts\Events\Dispatcher;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
-use Maatwebsite\Sidebar\SidebarManager;
-use Modules\Core\Sidebar\AdminSidebar;
+use Modules\Core\Traits\CanPublishConfiguration;
 
 class CoreServiceProvider extends ServiceProvider
 {
+    use CanPublishConfiguration;
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -33,16 +33,15 @@ class CoreServiceProvider extends ServiceProvider
     /**
      * Boot the application events.
      *
-     * @param \Maatwebsite\Sidebar\SidebarManager $manager
      * @return void
      */
-    public function boot(SidebarManager $manager)
+    public function boot()
     {
-        $manager->register(AdminSidebar::class);
+        $this->publishConfig('core', 'config');
+        $this->publishConfig('core', 'setting');
+        $this->registerViews();
 
         $this->registerMiddleware($this->app['router']);
-        $this->registerConfig();
-        $this->registerViews();
     }
 
     /**
@@ -52,7 +51,9 @@ class CoreServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton('beputi.onBackend', function () {
+            return $this->onBackend();
+        });
     }
 
     /**
@@ -69,22 +70,6 @@ class CoreServiceProvider extends ServiceProvider
                 $router->aliasMiddleware($name, $class);
             }
         }
-    }
-
-
-    /**
-     * Register config.
-     *
-     * @return void
-     */
-    protected function registerConfig()
-    {
-        $this->publishes([
-            __DIR__.'/../Config/config.php' => config_path('core.php'),
-        ]);
-        $this->mergeConfigFrom(
-            __DIR__.'/../Config/config.php', 'core'
-        );
     }
 
     /**
@@ -131,5 +116,19 @@ class CoreServiceProvider extends ServiceProvider
     public function provides()
     {
         return [];
+    }
+
+    /**
+     * Checks if the current url matches the configured backend uri
+     * @return bool
+     */
+    private function onBackend()
+    {
+        $url = app(Request::class)->url();
+        if (str_contains($url, config('beputi.core.config.admin-prefix'))) {
+            return true;
+        }
+
+        return false;
     }
 }

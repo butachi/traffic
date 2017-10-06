@@ -29,6 +29,6 @@ class Activation extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'sentinel.activations';
+        return 'auth.activations';
     }
 }

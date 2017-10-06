@@ -3,6 +3,7 @@
 namespace Modules\System\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Modules\Core\Traits\CanPublishConfiguration;
 use Modules\System\Entities\Profiles\EloquentProfile;
 use Modules\System\Entities\Users\UserToken;
 use Modules\System\Http\Middleware\AuthorisedApiToken;
@@ -16,6 +17,7 @@ use Modules\User\Http\Middleware\LoggedInMiddleware;
 
 class SystemServiceProvider extends ServiceProvider
 {
+    use CanPublishConfiguration;
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -48,8 +50,8 @@ class SystemServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->registerMiddleware();
         $this->registerViews();
+        $this->registerMiddleware();
     }
 
     /**
@@ -59,7 +61,8 @@ class SystemServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerConfig();
+        $this->publishConfig('system', 'config');
+
         $this->app->register(
             $this->getUserPackageServiceProvider()
         );
@@ -99,8 +102,7 @@ class SystemServiceProvider extends ServiceProvider
 
     private function registerBindings()
     {
-        $driver = config('system.driver');
-
+        $driver = config('beputi.system.config.driver');
         $this->app->bind(
             'Modules\System\Repositories\UserRepository',
             "Modules\\System\\Repositories\\{$driver}\\{$driver}UserRepository"
@@ -140,24 +142,9 @@ class SystemServiceProvider extends ServiceProvider
         }
     }
 
-    /**
-     * Register config.
-     *
-     * @return void
-     */
-    protected function registerConfig()
-    {
-        $this->publishes([
-                __DIR__.'/../Config/config.php' => config_path('system.php'),
-            ]);
-        $this->mergeConfigFrom(
-            __DIR__.'/../Config/config.php', 'system'
-        );
-    }
-
     private function getUserPackageServiceProvider()
     {
-        $driver = config('system.driver');
+        $driver = $this->app['config']->get('beputi.system.config.driver');
 
         if (!isset($this->providers[$driver])) {
             throw new \Exception("Driver [{$driver}] does not exist");

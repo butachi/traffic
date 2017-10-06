@@ -1,6 +1,6 @@
 <?php namespace Modules\System\Repositories\Sentinel;
 
-use Modules\Core\Facades\User;
+use Modules\Core\Facades\Sentinel;
 use Modules\System\Events\RoleWasUpdated;
 use Modules\System\Repositories\RoleRepository;
 
@@ -13,7 +13,7 @@ class SentinelRoleRepository implements RoleRepository
 
     public function __construct()
     {
-        $this->role = User::getRoleRepository()->createModel();
+        $this->role = Sentinel::getRoleRepository()->createModel();
     }
 
     /**
@@ -80,6 +80,6 @@ class SentinelRoleRepository implements RoleRepository
      */
     public function findByName($name)
     {
-        return User::findRoleByName($name);
+        return Sentinel::findRoleByName($name);
     }
 }

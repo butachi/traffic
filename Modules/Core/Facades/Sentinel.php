@@ -4,13 +4,13 @@ namespace Modules\Core\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class User extends Facade
+class Sentinel extends Facade
 {
     /**
      * {@inheritDoc}
      */
     protected static function getFacadeAccessor()
     {
-        return 'authentication';
+        return 'auth';
     }
 }

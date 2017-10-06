@@ -10,6 +10,6 @@ class Reminder extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'sentinel.reminders';
+        return 'reminders';
     }
 }

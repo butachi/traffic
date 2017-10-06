@@ -3,8 +3,9 @@
 use Modules\Core\Auth\Checkpoints\NotActivatedException;
 use Modules\Core\Auth\Checkpoints\ThrottlingException;
 use Modules\Core\Contracts\Authentication;
-use Modules\Core\Facades\User;
-use Modules\User\Events\UserHasActivatedAccount;
+use Modules\Core\Facades\Sentinel;
+use Modules\System\Entities\Users\UserInterface;
+use Modules\System\Events\UserHasActivatedAccount;
 
 class SentinelAuthentication implements Authentication
 {
@@ -17,7 +18,7 @@ class SentinelAuthentication implements Authentication
     public function login(array $credentials, $remember = false)
     {
         try {
-            if (User::authenticate($credentials, $remember)) {
+            if (Sentinel::authenticate($credentials, $remember)) {
                 return false;
             }
             return 'Invalid login or password.';
@@ -37,13 +38,13 @@ class SentinelAuthentication implements Authentication
      */
     public function register(array $user)
     {
-        return User::getUserRepository()->create((array) $user);
+        return Sentinel::getUserRepository()->create((array) $user);
     }
 
     /**
      * Assign a role to the given user.
-     * @param  \Modules\User\Repositories\UserRepository $user
-     * @param  \Modules\User\Repositories\RoleRepository $role
+     * @param  \Modules\System\Repositories\UserRepository $user
+     * @param  \Modules\System\Repositories\RoleRepository $role
      * @return mixed
      */
     public function assignRole($user, $role)
@@ -57,7 +58,7 @@ class SentinelAuthentication implements Authentication
      */
     public function logout()
     {
-        return User::logout();
+        return Sentinel::logout();
     }
 
     /**
@@ -68,7 +69,7 @@ class SentinelAuthentication implements Authentication
      */
     public function activate($userId, $code)
     {
-        $user = User::findById($userId);
+        $user = Sentinel::findById($userId);
 
         $success = Activation::complete($user, $code);
         if ($success) {
@@ -80,7 +81,7 @@ class SentinelAuthentication implements Authentication
 
     /**
      * Create an activation code for the given user
-     * @param  \Modules\User\Repositories\UserRepository $user
+     * @param  \Modules\System\Repositories\UserRepository $user
      * @return mixed
      */
     public function createActivation($user)
@@ -90,7 +91,7 @@ class SentinelAuthentication implements Authentication
 
     /**
      * Create a reminders code for the given user
-     * @param  \Modules\User\Repositories\UserRepository $user
+     * @param  \Modules\System\Repositories\UserRepository $user
      * @return mixed
      */
     public function createReminderCode($user)
@@ -120,11 +121,11 @@ class SentinelAuthentication implements Authentication
     public function hasAccess($permission)
     {
         return true;
-        if (! User::check()) {
+        if (! Sentinel::check()) {
             return false;
         }
 
-        return User::hasAccess($permission);
+        return Sentinel::hasAccess($permission);
     }
 
     /**
@@ -133,7 +134,7 @@ class SentinelAuthentication implements Authentication
      */
     public function check()
     {
-        $user = User::check();
+        $user = Sentinel::check();
 
         if ($user) {
             return true;
@@ -148,7 +149,7 @@ class SentinelAuthentication implements Authentication
      */
     public function user()
     {
-        return User::check();
+        return Sentinel::check();
     }
 
     /**
@@ -162,5 +163,14 @@ class SentinelAuthentication implements Authentication
         }
 
         return $user->id;
+    }
+
+    /**
+     * @param UserInterface $user
+     * @return \Modules\System\Entities\Users\UserInterface|void
+     */
+    public function logUserIn(UserInterface $user) : UserInterface
+    {
+        return Sentinel::login($user);
     }
 }

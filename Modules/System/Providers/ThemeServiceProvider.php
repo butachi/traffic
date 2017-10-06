@@ -22,8 +22,7 @@ class ThemeServiceProvider extends ServiceProvider
     private function setActiveTheme()
     {
         if ($this->inAdministration()) {
-            $themeName = $this->app['config']->get('core.admin-theme');
-
+            $themeName = $this->app['config']->get('beputi.core.config.admin-theme');
             return $this->app['stylist']->activate($themeName, true);
         }
         //$themeName = $this->app['setting.settings']->get('core::template', null, 'Flatly');
@@ -38,7 +37,7 @@ class ThemeServiceProvider extends ServiceProvider
     {
         $segment = config('laravellocalization.hideDefaultLocaleInURL', false) ? 1 : 2;
 
-        return $this->app['request']->segment($segment) === $this->app['config']->get('core.admin-prefix');
+        return $this->app['request']->segment($segment) === $this->app['config']->get('beputi.core.config.admin-prefix');
     }
 
     /**
@@ -47,7 +46,6 @@ class ThemeServiceProvider extends ServiceProvider
     private function registerAllThemes()
     {
         $directories = $this->app['files']->directories(config('stylist.themes.paths', [base_path('/Themes')])[0]);
-
         foreach ($directories as $directory) {
             $this->app['stylist']->registerPath($directory);
         }

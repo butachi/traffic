@@ -1,8 +1,11 @@
 <?php namespace Modules\System\Repositories\Sentinel;
 
 use Modules\Core\Facades\Activation;
-use Modules\Core\Facades\User;
+use Modules\Core\Facades\Sentinel;
 use Illuminate\Support\Facades\Hash;
+use Modules\System\Events\UserHasRegistered;
+use Modules\System\Events\UserIsCreating;
+use Modules\System\Events\UserWasCreated;
 use Modules\System\Events\UserWasUpdated;
 use Modules\System\Exceptions\UserNotFoundException;
 use Modules\System\Repositories\UserRepository;
@@ -20,8 +23,8 @@ class SentinelUserRepository implements UserRepository
 
     public function __construct()
     {
-        $this->user = User::getUserRepository()->createModel();
-        $this->role = User::getRoleRepository()->createModel();
+        $this->user = Sentinel::getUserRepository()->createModel();
+        $this->role = Sentinel::getRoleRepository()->createModel();
     }
 
     /**
@@ -40,33 +43,45 @@ class SentinelUserRepository implements UserRepository
 
     /**
      * Create a user resource
-     * @param $data
+     * @param array $data
+     * @param bool $activated
      * @return mixed
      */
-    public function create(array $data)
+    public function create(array $data, $activated = false)
     {
-        return $this->user->create((array) $data);
+        $this->hashPassword($data);
+
+        event($event = new UserIsCreating($data));
+        $user = $this->user->create((array) $data);
+
+        if ($activated) {
+            $this->activateUser($user);
+            event(new UserWasCreated($user));
+        } else {
+            event(new UserHasRegistered($user));
+        }
+
+        app(\Modules\System\Repositories\UserTokenRepository::class)->generateFor($user->id);
+
+        return $user;
     }
 
     /**
      * Create a user and assign roles to it
      * @param  array $data
-     * @param  array $role
+     * @param  array $roles
      * @param bool $activated
+     * @return User
      */
-    public function createWithRoles($data, $role, $activated = false)
+    public function createWithRoles($data, $roles, $activated = false)
     {
-        $this->hashPassword($data);
-        $user = $this->create((array) $data);
+        $user = $this->create((array) $data, $activated);
 
-        if ($role) {
-            $user->roles()->attach($role);
+        if ($roles) {
+            $user->roles()->attach($roles);
         }
 
-        if ($activated) {
-            $user->status = 'Active';
-            $user->save();
-        }
+        return $user;
     }
 
     /**
@@ -165,5 +180,16 @@ class SentinelUserRepository implements UserRepository
         }
 
         $data['password'] = Hash::make($data['password']);
+    }
+
+    /**
+     * Activate a user automatically
+     *
+     * @param $user
+     */
+    private function activateUser($user)
+    {
+        $activation = Activation::create($user);
+        Activation::complete($user, $activation->code);
     }
 }
