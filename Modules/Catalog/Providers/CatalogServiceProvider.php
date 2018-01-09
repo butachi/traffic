@@ -4,8 +4,11 @@ namespace Modules\Catalog\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Modules\Catalog\Entities\Category;
+use Modules\Catalog\Entities\Product;
 use Modules\Catalog\Repositories\CategoryRepository;
 use Modules\Catalog\Repositories\Eloquent\EloquentCategoryRepository;
+use Modules\Catalog\Repositories\Eloquent\EloquentProductRepository;
+use Modules\Catalog\Repositories\ProductRepository;
 
 class CatalogServiceProvider extends ServiceProvider
 {
@@ -93,6 +96,16 @@ class CatalogServiceProvider extends ServiceProvider
     {
         $this->app->bind(CategoryRepository::class, function () {
             $repository = new EloquentCategoryRepository(new Category());
+
+            if (! config('app.cache')) {
+                return $repository;
+            }
+
+            return new CacheMenuItemDecorator($repository);
+        });
+
+        $this->app->bind(ProductRepository::class, function () {
+            $repository = new EloquentProductRepository(new Product());
 
             if (! config('app.cache')) {
                 return $repository;
